@@ -81,10 +81,10 @@ const Contact = () => {
   };
 
   const socialLinks = [
-    { icon: 'fab fa-linkedin-in', url: '#', name: 'LinkedIn' },
-    { icon: 'fab fa-github', url: '#', name: 'GitHub' },
-    { icon: 'fab fa-twitter', url: '#', name: 'Twitter' },
-    { icon: 'fab fa-dribbble', url: '#', name: 'Dribbble' },
+    { icon: 'fab fa-linkedin-in', url: 'https://www.linkedin.com/in/shahabgul22/', name: 'LinkedIn' },
+    { icon: 'fab fa-github', url: 'https://github.com/Shahab-2', name: 'GitHub' },
+    { icon: 'fab fa-behance', url: 'https://www.behance.net/shahabgul', name: 'Behance' },
+    { icon: 'fab fa-instagram', url: 'https://www.instagram.com/shahabgul_/', name: 'Instagram' },
   ];
 
   return (
@@ -131,7 +131,7 @@ const Contact = () => {
             <i className="fas fa-briefcase text-xl text-gray-300 group-hover:text-white"></i>
             <span className="absolute right-16 bg-gray-800 text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Portfolio</span>
           </motion.a>
-          <motion.a 
+          {/* <motion.a 
             href="/resume"
             className="w-14 h-14 bg-gray-800 hover:bg-yellow-500 rounded-full flex items-center justify-center transition-colors duration-300 group"
             whileHover={{ scale: 1.1 }}
@@ -139,7 +139,7 @@ const Contact = () => {
           >
             <i className="fas fa-file-alt text-xl text-gray-300 group-hover:text-white"></i>
             <span className="absolute right-16 bg-gray-800 text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Resume</span>
-          </motion.a>
+          </motion.a> */}
           <motion.a 
             href="/contact"
             className="w-14 h-14 bg-yellow-500 rounded-full flex items-center justify-center transition-colors duration-300 group"
@@ -241,7 +241,7 @@ const Contact = () => {
               </div>
               <div>
                 <h4 className="font-bold text-sm text-yellow-500 mb-2 uppercase tracking-wider">ADDRESS POINT</h4>
-                <p className="text-gray-300">123 Street New York City, United States Of America 750065.</p>
+                <p className="text-gray-300">Islamabad, Pakistan</p>
               </div>
             </motion.div>
 
@@ -255,8 +255,8 @@ const Contact = () => {
               </div>
               <div>
                 <h4 className="font-bold text-sm text-yellow-500 mb-2 uppercase tracking-wider">MAIL ME</h4>
-                <p className="text-gray-300">steve@mail.com</p>
-                <p className="text-gray-300 mt-1">support@example.com</p>
+                <p className="text-gray-300">shahabgul117@gmail.com</p>
+                <p className="text-gray-300 mt-1">shahab.education1@gmail.com</p>
               </div>
             </motion.div>
 
@@ -270,8 +270,8 @@ const Contact = () => {
               </div>
               <div>
                 <h4 className="font-bold text-sm text-yellow-500 mb-2 uppercase tracking-wider">CALL ME</h4>
-                <p className="text-gray-300">+216 21 184 010</p>
-                <p className="text-gray-300 mt-1">+1 800 555 3947</p>
+                <p className="text-gray-300">+923155463297</p>
+                {/* <p className="text-gray-300 mt-1">+1 800 555 3947</p> */}
               </div>
             </motion.div>
 
@@ -455,7 +455,7 @@ const Contact = () => {
               <div className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <i className="fas fa-map-marker-alt text-gray-900 text-2xl"></i>
               </div>
-              <p className="text-white text-lg font-medium mb-2">New York City, USA</p>
+              <p className="text-white text-lg font-medium mb-2">Islamabad, Pakistan</p>
               <p className="text-gray-400">Map would be displayed here</p>
             </div>
           </div>

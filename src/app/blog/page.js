@@ -75,7 +75,7 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white relative pb-16">
       {/* Navigation Icons - Right Side */}
-      <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 hidden md:block">
+      {/* <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 hidden md:block">
         <div className="flex flex-col space-y-4">
           <button className="w-10 h-10 bg-gray-800 hover:bg-yellow-500 rounded-full flex items-center justify-center transition-colors duration-300">
             <i className="fas fa-cog text-white"></i>
@@ -96,7 +96,7 @@ const Blog = () => {
             <i className="fas fa-comment text-white"></i>
           </button>
         </div>
-      </div>
+      </div> */}
 
       {/* Header */}
       <header className="relative text-center py-20 px-4">
@@ -110,13 +110,13 @@ const Blog = () => {
           className="relative z-10"
         >
           <h2 className="text-5xl font-bold mb-1">
-            <span className="text-white">MY</span> <span className="text-yellow-500">BLOG</span>
+            <span className="text-white">Upcoming</span> <span className="text-yellow-500">...</span>
           </h2>
         </motion.div>
       </header>
 
       {/* Blog Grid */}
-      <motion.section 
+      {/* <motion.section 
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
@@ -148,7 +148,7 @@ const Blog = () => {
             </motion.article>
           ))}
         </div>
-      </motion.section>
+      </motion.section> */}
 
       {/* Mobile Navigation - Fixed at Bottom */}
       <div className="md:hidden fixed bottom-0 left-0 w-full bg-gray-800 z-50">

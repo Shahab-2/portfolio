@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import MobileNavigation from '@/components/MobileView';
 
 const Resume = () => {
   const [isClient, setIsClient] = useState(false);
@@ -54,55 +55,45 @@ const Resume = () => {
 
   const skills = [
     { name: 'HTML', level: 95, color: '#E44D26' },
-    { name: 'JavaScript', level: 89, color: '#F7DF1E' },
-    { name: 'CSS', level: 88, color: '#264DE4' },
-    { name: 'PHP', level: 78, color: '#777BB3' },
-    { name: 'WordPress', level: 95, color: '#21759B' },
-    { name: 'jQuery', level: 80, color: '#0769AD' },
-    { name: 'Angular', level: 75, color: '#DD0031' },
-    { name: 'React', level: 85, color: '#61DAFB' },
+    { name: 'CSS', level: 89, color: '#F7DF1E' },
+    { name: 'JavaScript', level: 88, color: '#264DE4' },
+    { name: 'REACT.JS', level: 88, color: '#777BB3' },
+    { name: 'NEXT.JS', level: 95, color: '#21759B' },
+    { name: 'NODE.JS', level: 95, color: '#21759B' },
+    { name: 'EXPRESS.JS', level: 95, color: '#21759B' },
+    { name: 'WORDPRESS', level: 80, color: '#0769AD' },
   ];
 
   const experiences = [
     {
-      period: '2021 - PRESENT',
-      title: 'SENIOR DEVELOPER',
-      company: 'ENVATO',
+      period: '2023 - PRESENT',
+      title: 'SOFTWARE DEVELOPER',
+      company: 'CODE ENTERPRISE PVT LTD.',
       description: 'Led cross-functional teams in developing responsive web applications. Implemented CI/CD pipelines and mentored junior developers on best practices.'
     },
     {
-      period: '2018 - 2021',
-      title: 'FULL-STACK DEVELOPER',
-      company: 'THEMEFOREST',
-      description: 'Developed and maintained multiple high-traffic website themes. Collaborated with UX designers to implement accessible and responsive interfaces.'
-    },
-    {
-      period: '2015 - 2018',
-      title: 'UI/UX CONSULTANT',
-      company: 'VIDEOHIVE',
-      description: 'Created wireframes and prototypes for client projects. Conducted usability testing and implemented feedback-driven improvements to user interfaces.'
+      period: '2022 - 2023',
+      title: 'FRONT END DEVELOPER',
+      company: 'SURG ENGINE MEDIA PVT LTD.',
+      description: 'Led cross-functional teams in developing responsive web applications. Implemented CI/CD pipelines and mentored junior developers on best practices.'
     }
   ];
 
   const education = [
     {
-      year: '2019',
-      degree: 'ADVANCED CERTIFICATION',
-      school: 'OXFORD UNIVERSITY',
+      year: '2020 - 2024',
+      degree: 'BACHELORS IN COMPUTER SCIENCE',
+      school: 'FEDERAL URDU UNIVERSITY OF ARTS SCIENCE AND TECHNOLOGY ISLAMABAD',
       description: 'Advanced Web Development Program focusing on modern JavaScript frameworks, API design, and enterprise architecture patterns.'
     },
     {
-      year: '2015',
-      degree: 'MASTER\'S DEGREE',
-      school: 'KIEV UNIVERSITY',
-      description: 'Master of Science in Computer Science with specialization in Human-Computer Interaction and User Experience Design.'
+      year: '2019',
+      degree: 'FSC PRE ENGENEERING',
+      school: 'ISLAMABAD MODEL COLLEGE FOR BOYS ISLAMABAD G-9/4',
+      description: 'Advanced Web Development Program focusing on modern JavaScript frameworks, API design, and enterprise architecture patterns.'
     },
-    {
-      year: '2013',
-      degree: 'BACHELOR DEGREE',
-      school: 'TUNIS HIGH SCHOOL',
-      description: 'Bachelor of Science in Information Technology with minor in Graphic Design. Graduated with honors and dean\'s list recognition.'
-    }
+
+
   ];
 
   const SkillCircle = ({ name, level, color, index }) => {
@@ -242,7 +233,7 @@ const Resume = () => {
           >
             <div className="p-6 flex flex-col h-full">
               <div className="mb-8 pb-4 border-b border-gray-700">
-                <h2 className="text-xl font-bold">Steve <span className="text-yellow-500">Milner</span></h2>
+                <h2 className="text-xl font-bold">Shahab <span className="text-yellow-500">Gul</span></h2>
                 <p className="text-gray-400 text-sm">Web Developer</p>
               </div>
               <nav className="flex-1">
@@ -351,6 +342,7 @@ const Resume = () => {
             <i className="fas fa-download text-xl text-gray-300 group-hover:text-white"></i>
             <span className="absolute right-16 bg-gray-800 text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Download CV</span>
           </motion.a>
+          <MobileNavigation/>
         </motion.div>
       </div>
 
@@ -424,19 +416,19 @@ const Resume = () => {
             <div className="grid grid-cols-2 gap-6">
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">First Name:</p>
-                <p className="font-medium text-lg">Steve</p>
+                <p className="font-medium text-lg">Shahab</p>
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Last Name:</p>
-                <p className="font-medium text-lg">Milner</p>
+                <p className="font-medium text-lg">Gul</p>
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Age:</p>
-                <p className="font-medium text-lg">27 Years</p>
+                <p className="font-medium text-lg">24 Years</p>
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Nationality:</p>
-                <p className="font-medium text-lg">Tunisian</p>
+                <p className="font-medium text-lg">Pakistani</p>
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Freelance:</p>
@@ -444,23 +436,23 @@ const Resume = () => {
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Address:</p>
-                <p className="font-medium text-lg">Tunis</p>
+                <p className="font-medium text-lg">Islamabad</p>
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Phone:</p>
-                <p className="font-medium text-lg">+21621184010</p>
+                <p className="font-medium text-lg">+923155463297</p>
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Email:</p>
-                <p className="font-medium text-lg">you@mail.com</p>
+                <p className="font-medium text-lg">shahabgul117@gmail.com</p>
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Skype:</p>
-                <p className="font-medium text-lg">steve.milner</p>
+                <p className="font-medium text-lg">live:.cid.9ec40613bfef8a5e</p>
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Languages:</p>
-                <p className="font-medium text-lg">French, English</p>
+                <p className="font-medium text-lg">English, Urdu, Pashto, Punjabi</p>
               </div>
             </div>
             <motion.button 
@@ -468,7 +460,7 @@ const Resume = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>DOWNLOAD CV</span> 
+              {/* <span>DOWNLOAD CV</span>  */}
               <span className="relative ml-2 w-6 h-6 flex items-center justify-center overflow-hidden rounded-full bg-yellow-500 group-hover:bg-white transition-colors">
                 <i className="fas fa-download text-gray-900 text-xs"></i>
               </span>
@@ -489,7 +481,7 @@ const Resume = () => {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                6<sup>+</sup>
+                2<sup>+</sup>
               </motion.h2>
               <div className="w-12 h-1 bg-yellow-500 my-3 rounded-full"></div>
               <p className="text-sm text-gray-300 text-center font-medium tracking-wider uppercase">YEARS OF<br />EXPERIENCE</p>
@@ -507,7 +499,7 @@ const Resume = () => {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 400, damping: 10, delay: 0.1 }}
               >
-                97<sup>+</sup>
+                10<sup>+</sup>
               </motion.h2>
               <div className="w-12 h-1 bg-yellow-500 my-3 rounded-full"></div>
               <p className="text-sm text-gray-300 text-center font-medium tracking-wider uppercase">COMPLETED<br />PROJECTS</p>
@@ -525,7 +517,7 @@ const Resume = () => {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 400, damping: 10, delay: 0.2 }}
               >
-                81<sup>+</sup>
+                10<sup>+</sup>
               </motion.h2>
               <div className="w-12 h-1 bg-yellow-500 my-3 rounded-full"></div>
               <p className="text-sm text-gray-300 text-center font-medium tracking-wider uppercase">HAPPY<br />CUSTOMERS</p>
@@ -543,7 +535,7 @@ const Resume = () => {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 400, damping: 10, delay: 0.3 }}
               >
-                53<sup>+</sup>
+                3<sup>+</sup>
               </motion.h2>
               <div className="w-12 h-1 bg-yellow-500 my-3 rounded-full"></div>
               <p className="text-sm text-gray-300 text-center font-medium tracking-wider uppercase">AWARDS<br />WON</p>
@@ -700,7 +692,7 @@ const Resume = () => {
             ADDITIONAL TOOLS & TECHNOLOGIES
           </h4>
           <div className="flex flex-wrap gap-3">
-            {["Git", "Docker", "AWS", "Firebase", "MongoDB", "GraphQL", "TypeScript", "Next.js", "TailwindCSS", "Node.js", "Express", "Vue.js"].map((tool, index) => (
+            {["Git", "Docker", "AWS", "Bootstrap", "MongoDB", "GraphQL", "TypeScript", "Next.js", "TailwindCSS", "Node.js", "Express", "Material UI"].map((tool, index) => (
               <motion.div 
                 key={index}
                 initial={{ opacity: 0, y: 10 }}
@@ -716,7 +708,7 @@ const Resume = () => {
         </motion.div>
       </motion.section>
             {/* Footer */}
-            <footer className="py-8 px-4 text-center text-gray-400 border-t border-gray-800">
+            {/* <footer className="py-8 px-4 text-center text-gray-400 border-t border-gray-800">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-center space-x-4 mb-4">
             <motion.a 
@@ -750,7 +742,7 @@ const Resume = () => {
           </div>
           <p className="text-sm">© {new Date().getFullYear()} Steve Milner. All rights reserved.</p>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };
