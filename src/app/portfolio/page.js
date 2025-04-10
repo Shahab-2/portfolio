@@ -75,7 +75,7 @@ const Portfolio = () => {
         "A modern e-commerce platform designed to provide a seamless shopping experience. It features product browsing, smart filtering, a secure checkout process, and responsive design for all devices.",
       client: "ShopEase Online",
       alt: "ShopEase E-commerce Website Screenshots",
-      projectLink: "https://shopease.example.com/",
+      projectLink: "https://www.drapefit.com/",
       technologies: ["React.js", "Next.js", "MySQL", "Tailwind CSS", "Redux Toolkit", "Node.js", "Express.js"],
       features: [
         "Product Listing and Search",
@@ -99,7 +99,7 @@ const Portfolio = () => {
         "An immersive tourism platform that helps users explore hidden gems, local attractions, and cultural experiences. Includes interactive maps, itinerary planning, and user-submitted stories to enrich travel experiences.",
       client: "Discover Local Lore",
       alt: "Discover Local Lore Dashboard Screenshots",
-      projectLink: "https://discoverlocallore.example.com/",
+      projectLink: "https://discoverlocallore.com/",
       technologies: ["Next.js", "React.js", "MUI Material UI", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
       features: [
         "Tourist Attraction Listings",
@@ -123,7 +123,7 @@ const Portfolio = () => {
         "An online platform designed to provide high-quality Quran tutoring with personalized lessons, live sessions, and interactive learning tools. Features include progress tracking, Quranic studies resources, and teacher-student communication.",
       client: "Quran Online",
       alt: "Quran Online Tutoring Platform Screenshots",
-      projectLink: "https://quranonline.example.com/",
+      projectLink: "https://quranoneline.com/",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
       features: [
         "Personalized Quran Lessons",
@@ -147,7 +147,7 @@ const Portfolio = () => {
         "A social platform for community-driven discussions, similar to Reddit. Users can post, comment, vote, and engage in discussions across various topics. Includes subreddits, trending posts, and user profiles.",
       client: "Egrowly",
       alt: "Egrowly Community Dashboard Screenshots",
-      projectLink: "https://egrowly.example.com/",
+      projectLink: "https://egrowly.com/",
       technologies: ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
       features: [
         "Community Forums (Subreddits)",
@@ -172,7 +172,7 @@ const Portfolio = () => {
         "A robust supply chain management platform designed to streamline operations, track inventory, manage suppliers, and optimize logistics. Features real-time data tracking, order management, and detailed analytics for better decision-making.",
       client: "ISCS Supply Chain Solutions",
       alt: "ISCS Supply Chain Dashboard Screenshots",
-      projectLink: "https://iscs-supplychain.example.com/",
+      projectLink: "https://i-scs.co.uk/",
       technologies: ["Next.js", "React.js", "Bootstrap", "MySQL", "Node.js", "Redux"],
       features: [
         "Inventory Tracking & Management",
@@ -196,7 +196,7 @@ const Portfolio = () => {
         "A beautifully designed website developed from Figma, tailored for the client's business. It offers a clean, responsive layout with smooth UI/UX, ensuring seamless user experience across all devices.",
       client: "Serniore Netherlands",
       alt: "Serniore Netherlands Website Screenshots",
-      projectLink: "https://serniore-netherlands.example.com/",
+      projectLink: "https://voucherpagina.seniorenvoordeelpas.nl/new-page/",
       technologies: ["Vanilla.js", "CSS3", "HTML5", "UI/UX Design", "Responsiveness"],
       features: [
         "Clean, Modern Design",
@@ -221,7 +221,7 @@ const Portfolio = () => {
         "A fully integrated WooCommerce website for a Saudi Arabian company offering a variety of ice creams, cakes, and batteries. Features include online ordering, product customization, and secure payment options.",
       client: "Saudi F&B and Retail Solutions",
       alt: "Ice Cream, Cake, and Battery Shop E-Commerce Website Screenshots",
-      projectLink: "https://www.saudi-shop.com/",
+      projectLink: "https://www.marblestore.sa/",
       technologies: ["WooCommerce", "WordPress", "JavaScript", "Ajax", "JQuery", "MySQL", "Bootstrap", "PHP", "HTML5", "CSS3"],
       features: [
         "Product Customization & Selection",
@@ -246,7 +246,7 @@ const Portfolio = () => {
     "A dynamic hospitality platform designed to showcase our passion for food, offering a variety of unique food and beverage concepts. Features include easy ordering, menu browsing, and restaurant location tracking.",
   client: "Global F&B Concepts",
   alt: "F&B Concept Platform Screenshots",
-  projectLink: "https://www.foodconcepts.com/",
+  projectLink: "https://zad-ksa.com/",
   technologies: ["WordPress", "JavaScript", "Ajax", "JQuery", "MySQL", "Bootstrap", "PHP", "HTML5", "CSS3"],
   features: [
     "Menu Browsing & Ordering",
@@ -270,7 +270,7 @@ const Portfolio = () => {
         "A custom-built WooCommerce website designed for a sanitary products store. Features include an easy-to-navigate catalog, secure payment integration, and a user-friendly interface for browsing and purchasing sanitary goods.",
       client: "Sanitary Solutions Co.",
       alt: "Sanitary Shop WooCommerce Website Screenshots",
-      projectLink: "https://www.sanitaryshop.com/",
+      projectLink: "https://shop.codenterprise.com/",
       technologies: ["WooCommerce", "WordPress", "JavaScript", "Ajax", "JQuery", "MySQL", "Bootstrap", "PHP", "HTML5", "CSS3"],
       features: [
         "Product Catalog with Categories",
@@ -344,7 +344,7 @@ const Portfolio = () => {
         "An online FM radio website offering live streaming of music, news, and talk shows. The website features a user-friendly interface, real-time audio streaming, and easy access to the station's schedule.",
       client: "LFMAudio",
       alt: "LFMAudio FM Radio Station Website Screenshots",
-      projectLink: "https://www.lfmaudio.com/",
+      projectLink: "https://www.lfmaudio.com/club-top-40-dev/",
       technologies: ["WordPress", "JavaScript", "DIVI Builder", "Bootstrap", "PHP", "HTML5", "CSS3"],
       features: [
         "Live Audio Streaming",
@@ -369,7 +369,7 @@ const Portfolio = () => {
         "A user-friendly website offering financial services for funding and loans. The platform features detailed loan options, application forms, and real-time loan status tracking.",
       client: "White Pine Funding",
       alt: "White Pine Funding Website Screenshots",
-      projectLink: "https://www.whitepinefunding.com/",
+      projectLink: "https://whitepinefunding.com/",
       technologies: ["WordPress", "Elementor Builder", "jQuery", "Bootstrap", "PHP", "HTML5", "CSS3"],
       features: [
         "Loan Application Forms",
