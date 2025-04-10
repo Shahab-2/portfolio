@@ -8,7 +8,9 @@ const Portfolio = () => {
   const [isClient, setIsClient] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
+  
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -18,69 +20,23 @@ const Portfolio = () => {
       id: 1,
       images: [
         "/assets/ikmal.png",
-        "/assets/hrms-2.png",
-        "/assets/hrms-3.png",
-        "/assets/hrms-4.png"
+        "/assets/hrm2.png",
+        "/assets/hrms3.png",
+        "/assets/hrm4.png"
       ],
-      category: "Web Development",
+      category: "HRM System Website",
       title: "Human Resource Management System",
       description:
         "A comprehensive HR management platform with advanced employee tracking, performance management features, and intuitive user interface design.",
       client: "Saudian Client",
       alt: "Human Resource Management System Screenshots",
       projectLink: "https://www.ikmal.sa/",
-      technologies: ["React", "Node.js", "MongoDB", "Tailwind CSS", "Express"],
+      technologies: ["React.js", "Next.js", "Mysql", "Bootstrap", "Node.js", "Express.js"],
       features: [
         "Employee Performance Tracking",
         "Advanced Reporting",
         "Role-Based Access Control",
         "Attendance Management"
-      ]
-    },
-    {
-      id: 2,
-      images: [
-        "/assets/marble.png",
-        "/assets/ecommerce-2.png",
-        "/assets/ecommerce-3.png",
-        "/assets/ecommerce-4.png"
-      ],
-      category: "E-Commerce",
-      title: "Modern E-Commerce Platform",
-      description:
-        "A full-featured online shopping experience with advanced product filtering, secure payment integration, and responsive design.",
-      client: "Global Retail Solutions",
-      alt: "E-Commerce Website Screenshots",
-      projectLink: "https://www.marblestore.sa/",
-      technologies: ["Next.js", "TypeScript", "Stripe", "Prisma", "GraphQL"],
-      features: [
-        "Product Filtering",
-        "Secure Payments",
-        "User Authentication",
-        "Responsive Design"
-      ]
-    },
-    {
-      id: 3,
-      images: [
-        "/assets/zad-ksa.png",
-        "/assets/dashboard-2.png",
-        "/assets/dashboard-3.png",
-        "/assets/dashboard-4.png"
-      ],
-      category: "Web Application",
-      title: "Food Industry",
-      description:
-        "Powerful data visualization and business intelligence dashboard with real-time reporting, advanced charting, and interactive insights.",
-      client: "Tech Innovations Inc.",
-      alt: "Analytics Dashboard Screenshots",
-      projectLink: "https://zad-ksa.com/",
-      technologies: ["React", "Chart.js", "Firebase", "Material-UI", "Redux"],
-      features: [
-        "Real-Time Reporting",
-        "Interactive Charts",
-        "Data Filtering",
-        "Performance Metrics"
       ]
     },
     {
@@ -90,37 +46,14 @@ const Portfolio = () => {
         "/assets/dashboard-3.png",
         "/assets/dashboard-4.png"
       ],
-      category: "Web Application",
+      category: "Lead Generation Website",
       title: "Prime Referral",
       description:
         "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
       client: "Prime Referral",
       alt: "Prime Referral Dashboard Screenshots",
       projectLink: "https://primereferral.us/",
-      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
-      features: [
-        "Lead Generation Services",
-        "Smart Lead Filtering",
-        "Real-Time Analytics",
-        "Performance Tracking",
-        "Client Dashboard"
-      ]
-    },
-    {
-      images: [
-        "/assets/bathleganza.png",
-        "/assets/dashboard-2.png",
-        "/assets/dashboard-3.png",
-        "/assets/dashboard-4.png"
-      ],
-      category: "Web Application",
-      title: "Prime Referral",
-      description:
-        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
-      client: "Prime Referral",
-      alt: "Prime Referral Dashboard Screenshots",
-      projectLink: "https://primereferral.us/",
-      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+      technologies: ["Next.js", "serverless", "Typescript", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
       features: [
         "Lead Generation Services",
         "Smart Lead Filtering",
@@ -132,49 +65,27 @@ const Portfolio = () => {
     {
       images: [
         "/assets/drapfit.png",
-        "/assets/dashboard-2.png",
-        "/assets/dashboard-3.png",
-        "/assets/dashboard-4.png"
+        "/assets/shop-product.png",
+        "/assets/shop-cart.png",
+        "/assets/shop-checkout.png"
       ],
-      category: "Web Application",
-      title: "Prime Referral",
+      category: "E-commerce Website",
+      title: "Drap Fit",
       description:
-        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
-      client: "Prime Referral",
-      alt: "Prime Referral Dashboard Screenshots",
-      projectLink: "https://primereferral.us/",
-      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+        "A modern e-commerce platform designed to provide a seamless shopping experience. It features product browsing, smart filtering, a secure checkout process, and responsive design for all devices.",
+      client: "ShopEase Online",
+      alt: "ShopEase E-commerce Website Screenshots",
+      projectLink: "https://shopease.example.com/",
+      technologies: ["React.js", "Next.js", "MySQL", "Tailwind CSS", "Redux Toolkit", "Node.js", "Express.js"],
       features: [
-        "Lead Generation Services",
-        "Smart Lead Filtering",
-        "Real-Time Analytics",
-        "Performance Tracking",
-        "Client Dashboard"
+        "Product Listing and Search",
+        "Smart Filtering by Category & Price",
+        "User Authentication & Dashboard",
+        "Shopping Cart & Wishlist",
+        "Secure Checkout with Order Tracking"
       ]
     },
-    {
-      images: [
-        "/assets/serniore.png",
-        "/assets/dashboard-2.png",
-        "/assets/dashboard-3.png",
-        "/assets/dashboard-4.png"
-      ],
-      category: "Web Application",
-      title: "Prime Referral",
-      description:
-        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
-      client: "Prime Referral",
-      alt: "Prime Referral Dashboard Screenshots",
-      projectLink: "https://primereferral.us/",
-      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
-      features: [
-        "Lead Generation Services",
-        "Smart Lead Filtering",
-        "Real-Time Analytics",
-        "Performance Tracking",
-        "Client Dashboard"
-      ]
-    },
+    
     {
       images: [
         "/assets/discoverlore.png",
@@ -182,22 +93,23 @@ const Portfolio = () => {
         "/assets/dashboard-3.png",
         "/assets/dashboard-4.png"
       ],
-      category: "Web Application",
-      title: "Prime Referral",
+      category: "Tourism Web Application",
+      title: "Discover Local Lore",
       description:
-        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
-      client: "Prime Referral",
-      alt: "Prime Referral Dashboard Screenshots",
-      projectLink: "https://primereferral.us/",
-      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+        "An immersive tourism platform that helps users explore hidden gems, local attractions, and cultural experiences. Includes interactive maps, itinerary planning, and user-submitted stories to enrich travel experiences.",
+      client: "Discover Local Lore",
+      alt: "Discover Local Lore Dashboard Screenshots",
+      projectLink: "https://discoverlocallore.example.com/",
+      technologies: ["Next.js", "React.js", "MUI Material UI", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
       features: [
-        "Lead Generation Services",
-        "Smart Lead Filtering",
-        "Real-Time Analytics",
-        "Performance Tracking",
-        "Client Dashboard"
+        "Tourist Attraction Listings",
+        "Interactive Maps & Itinerary Planner",
+        "User Reviews & Ratings",
+        "Cultural Stories and Local Insights",
+        "Responsive Design for All Devices"
       ]
     },
+    
     {
       images: [
         "/assets/quranoneline.png",
@@ -206,21 +118,22 @@ const Portfolio = () => {
         "/assets/dashboard-4.png"
       ],
       category: "Web Application",
-      title: "Prime Referral",
+      title: "Quran Online",
       description:
-        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
-      client: "Prime Referral",
-      alt: "Prime Referral Dashboard Screenshots",
-      projectLink: "https://primereferral.us/",
-      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+        "An online platform designed to provide high-quality Quran tutoring with personalized lessons, live sessions, and interactive learning tools. Features include progress tracking, Quranic studies resources, and teacher-student communication.",
+      client: "Quran Online",
+      alt: "Quran Online Tutoring Platform Screenshots",
+      projectLink: "https://quranonline.example.com/",
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
       features: [
-        "Lead Generation Services",
-        "Smart Lead Filtering",
-        "Real-Time Analytics",
-        "Performance Tracking",
-        "Client Dashboard"
+        "Personalized Quran Lessons",
+        "Live One-on-One Sessions",
+        "Progress Tracking & Certificates",
+        "Teacher-Student Communication",
+        "Quranic Resources & Study Materials"
       ]
-    },
+    }
+    ,
     {
       images: [
         "/assets/egrowly.png",
@@ -229,21 +142,23 @@ const Portfolio = () => {
         "/assets/dashboard-4.png"
       ],
       category: "Web Application",
-      title: "Prime Referral",
+      title: "Egrowly",
       description:
-        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
-      client: "Prime Referral",
-      alt: "Prime Referral Dashboard Screenshots",
-      projectLink: "https://primereferral.us/",
-      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+        "A social platform for community-driven discussions, similar to Reddit. Users can post, comment, vote, and engage in discussions across various topics. Includes subreddits, trending posts, and user profiles.",
+      client: "Egrowly",
+      alt: "Egrowly Community Dashboard Screenshots",
+      projectLink: "https://egrowly.example.com/",
+      technologies: ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
       features: [
-        "Lead Generation Services",
-        "Smart Lead Filtering",
-        "Real-Time Analytics",
-        "Performance Tracking",
-        "Client Dashboard"
+        "Community Forums (Subreddits)",
+        "Post Creation & Commenting",
+        "Upvoting & Downvoting",
+        "Trending Posts & Topics",
+        "User Profiles & Engagement"
       ]
     },
+    
+
     {
       images: [
         "/assets/iscs-uk.png",
@@ -252,21 +167,120 @@ const Portfolio = () => {
         "/assets/dashboard-4.png"
       ],
       category: "Web Application",
-      title: "Prime Referral",
+      title: "ISCS Supply Chain Management",
       description:
-        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
-      client: "Prime Referral",
-      alt: "Prime Referral Dashboard Screenshots",
-      projectLink: "https://primereferral.us/",
-      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+        "A robust supply chain management platform designed to streamline operations, track inventory, manage suppliers, and optimize logistics. Features real-time data tracking, order management, and detailed analytics for better decision-making.",
+      client: "ISCS Supply Chain Solutions",
+      alt: "ISCS Supply Chain Dashboard Screenshots",
+      projectLink: "https://iscs-supplychain.example.com/",
+      technologies: ["Next.js", "React.js", "Bootstrap", "MySQL", "Node.js", "Redux"],
       features: [
-        "Lead Generation Services",
-        "Smart Lead Filtering",
-        "Real-Time Analytics",
-        "Performance Tracking",
-        "Client Dashboard"
+        "Inventory Tracking & Management",
+        "Supplier & Vendor Management",
+        "Order Tracking & Optimization",
+        "Real-Time Analytics & Reports",
+        "Logistics & Shipment Management"
       ]
     },
+    
+    {
+      images: [
+        "/assets/serniore.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Web Application",
+      title: "Serniore Netherlands",
+      description:
+        "A beautifully designed website developed from Figma, tailored for the client's business. It offers a clean, responsive layout with smooth UI/UX, ensuring seamless user experience across all devices.",
+      client: "Serniore Netherlands",
+      alt: "Serniore Netherlands Website Screenshots",
+      projectLink: "https://serniore-netherlands.example.com/",
+      technologies: ["Vanilla.js", "CSS3", "HTML5", "UI/UX Design", "Responsiveness"],
+      features: [
+        "Clean, Modern Design",
+        "Fully Responsive Layout",
+        "Smooth User Interface & Navigation",
+        "Custom Interactive Elements",
+        "Optimized for All Devices"
+      ]
+    }
+    ,
+    {
+      id: 2,
+      images: [
+        "/assets/marble.png",
+        "/assets/ecommerce-2.png",
+        "/assets/ecommerce-3.png",
+        "/assets/ecommerce-4.png"
+      ],
+      category: "E-Commerce",
+      title: "Ice Creams, Cakes, and Battery Shop",
+      description:
+        "A fully integrated WooCommerce website for a Saudi Arabian company offering a variety of ice creams, cakes, and batteries. Features include online ordering, product customization, and secure payment options.",
+      client: "Saudi F&B and Retail Solutions",
+      alt: "Ice Cream, Cake, and Battery Shop E-Commerce Website Screenshots",
+      projectLink: "https://www.saudi-shop.com/",
+      technologies: ["WooCommerce", "WordPress", "JavaScript", "Ajax", "JQuery", "MySQL", "Bootstrap", "PHP", "HTML5", "CSS3"],
+      features: [
+        "Product Customization & Selection",
+        "Online Ordering System",
+        "Secure Payment Integration",
+        "Real-Time Stock Updates",
+        "Responsive Design for Mobile & Desktop"
+      ]
+    },
+    
+    {
+      id: 3,
+      images: [
+        "/assets/zad-ksa.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Hospitality & F&B",
+  title: "Food & Beverage Concepts",
+  description:
+    "A dynamic hospitality platform designed to showcase our passion for food, offering a variety of unique food and beverage concepts. Features include easy ordering, menu browsing, and restaurant location tracking.",
+  client: "Global F&B Concepts",
+  alt: "F&B Concept Platform Screenshots",
+  projectLink: "https://www.foodconcepts.com/",
+  technologies: ["WordPress", "JavaScript", "Ajax", "JQuery", "MySQL", "Bootstrap", "PHP", "HTML5", "CSS3"],
+  features: [
+    "Menu Browsing & Ordering",
+    "Restaurant Location Finder",
+    "Dynamic Food & Beverage Concepts",
+    "Seamless User Experience",
+    "Responsive Design for All Devices"
+  ]
+    },
+
+    {
+      images: [
+        "/assets/bathleganza.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "E-Commerce",
+      title: "Sanitary Shop WooCommerce",
+      description:
+        "A custom-built WooCommerce website designed for a sanitary products store. Features include an easy-to-navigate catalog, secure payment integration, and a user-friendly interface for browsing and purchasing sanitary goods.",
+      client: "Sanitary Solutions Co.",
+      alt: "Sanitary Shop WooCommerce Website Screenshots",
+      projectLink: "https://www.sanitaryshop.com/",
+      technologies: ["WooCommerce", "WordPress", "JavaScript", "Ajax", "JQuery", "MySQL", "Bootstrap", "PHP", "HTML5", "CSS3"],
+      features: [
+        "Product Catalog with Categories",
+        "Secure Online Payments",
+        "Customer Reviews & Ratings",
+        "Customizable Product Options",
+        "User-Friendly Interface & Responsive Design"
+      ]
+    }
+    ,
     {
       images: [
         "/assets/abadzone.png",
@@ -274,22 +288,24 @@ const Portfolio = () => {
         "/assets/dashboard-3.png",
         "/assets/dashboard-4.png"
       ],
-      category: "Web Application",
-      title: "Prime Referral",
+      category: "Real Estate",
+      title: "AbadZone",
       description:
-        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
-      client: "Prime Referral",
-      alt: "Prime Referral Dashboard Screenshots",
-      projectLink: "https://primereferral.us/",
-      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+        "A comprehensive real estate website designed to help users buy, sell, or rent properties. Features include advanced property search, detailed listings, and responsive design for a seamless experience on all devices.",
+      client: "Abadzone Real Estate",
+      alt: "Property Finder Website Screenshots",
+      projectLink: "https://www.abadzone.com/",
+      technologies: ["WordPress", "JavaScript", "Ajax", "JQuery", "MySQL", "Bootstrap", "PHP", "HTML5", "CSS3"],
       features: [
-        "Lead Generation Services",
-        "Smart Lead Filtering",
-        "Real-Time Analytics",
-        "Performance Tracking",
-        "Client Dashboard"
+        "Advanced Property Search",
+        "Detailed Property Listings",
+        "Responsive Design",
+        "User Registration & Profile Management",
+        "Map Integration for Property Locations",
+        "Property Comparison Tools"
       ]
-    },
+    }
+    ,
     {
       images: [
         "/assets/virrgotech.png",
@@ -298,21 +314,23 @@ const Portfolio = () => {
         "/assets/dashboard-4.png"
       ],
       category: "Web Application",
-      title: "Prime Referral",
+      title: "VirrgoTech Agency",
       description:
-        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
-      client: "Prime Referral",
-      alt: "Prime Referral Dashboard Screenshots",
-      projectLink: "https://primereferral.us/",
-      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+        "A sleek and professional website for a digital agency offering innovative solutions in web development, marketing, and design. The website includes a portfolio, service offerings, and client testimonials.",
+      client: "VirrgoTech Agency",
+      alt: "VirrgoTech Agency Website Screenshots",
+      projectLink: "https://www.virrgotech.com/",
+      technologies: ["WordPress", "JavaScript", "Ajax", "JQuery", "MySQL", "Bootstrap", "PHP", "HTML5", "CSS3"],
       features: [
-        "Lead Generation Services",
-        "Smart Lead Filtering",
-        "Real-Time Analytics",
-        "Performance Tracking",
-        "Client Dashboard"
+        "Service Portfolio",
+        "Client Testimonials",
+        "Responsive Design",
+        "SEO Optimization",
+        "Contact Forms & Inquiry Management",
+        "Project Showcase & Case Studies"
       ]
-    },
+    }
+    ,
     {
       images: [
         "/assets/lfmaudio.png",
@@ -321,21 +339,23 @@ const Portfolio = () => {
         "/assets/dashboard-4.png"
       ],
       category: "Web Application",
-      title: "Prime Referral",
+      title: "LFMAudio - FM Radio Station",
       description:
-        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
-      client: "Prime Referral",
-      alt: "Prime Referral Dashboard Screenshots",
-      projectLink: "https://primereferral.us/",
-      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+        "An online FM radio website offering live streaming of music, news, and talk shows. The website features a user-friendly interface, real-time audio streaming, and easy access to the station's schedule.",
+      client: "LFMAudio",
+      alt: "LFMAudio FM Radio Station Website Screenshots",
+      projectLink: "https://www.lfmaudio.com/",
+      technologies: ["WordPress", "JavaScript", "DIVI Builder", "Bootstrap", "PHP", "HTML5", "CSS3"],
       features: [
-        "Lead Generation Services",
-        "Smart Lead Filtering",
-        "Real-Time Analytics",
-        "Performance Tracking",
-        "Client Dashboard"
+        "Live Audio Streaming",
+        "Schedule Display",
+        "User-Friendly Interface",
+        "Podcast and Show Archive",
+        "Responsive Design",
+        "Real-Time Audio Updates"
       ]
-    },
+    }
+    ,
     {
       images: [
         "/assets/whitepinefunding.png",
@@ -344,21 +364,23 @@ const Portfolio = () => {
         "/assets/dashboard-4.png"
       ],
       category: "Web Application",
-      title: "Prime Referral",
+      title: "White Pine Funding",
       description:
-        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
-      client: "Prime Referral",
-      alt: "Prime Referral Dashboard Screenshots",
-      projectLink: "https://primereferral.us/",
-      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+        "A user-friendly website offering financial services for funding and loans. The platform features detailed loan options, application forms, and real-time loan status tracking.",
+      client: "White Pine Funding",
+      alt: "White Pine Funding Website Screenshots",
+      projectLink: "https://www.whitepinefunding.com/",
+      technologies: ["WordPress", "Elementor Builder", "jQuery", "Bootstrap", "PHP", "HTML5", "CSS3"],
       features: [
-        "Lead Generation Services",
-        "Smart Lead Filtering",
-        "Real-Time Analytics",
-        "Performance Tracking",
-        "Client Dashboard"
+        "Loan Application Forms",
+        "Real-Time Loan Status Tracking",
+        "User-Friendly Interface",
+        "Client Dashboard",
+        "Responsive Design",
+        "Financial Services Overview"
       ]
-    },
+    }
+    ,
     
   ];
 
@@ -494,14 +516,15 @@ const Portfolio = () => {
                     placeholder="blur"
                     blurDataURL="/assets/ikmal.png"
                   />
-                    <div className="absolute inset-0 bg-yellow-500 bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                    <div className="absolute inset-0 bg-yellow-500 bg-opacity-80 opacity-0 group-hover:opacity-70 transition-opacity duration-500 flex flex-col items-center justify-center">
                       <motion.div 
                         initial={{ opacity: 0, y: 20 }}
                         whileHover={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
                         className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
                       >
-                        <div className="flex space-x-4 mb-4">
+                        <div
+                         className="flex space-x-4 mb-4">
                           <motion.button 
                             className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg"
                             whileHover={{ scale: 1.1 }}
@@ -520,7 +543,8 @@ const Portfolio = () => {
                             </motion.div>
                           </Link>
                         </div>
-                        <h4 className="text-white font-bold text-xl text-center">
+                        <h4 
+                        className="text-white font-bold text-xl text-center">
                           {item.title}
                         </h4>
                       </motion.div>
@@ -548,7 +572,7 @@ const Portfolio = () => {
                         Technologies
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        {item.technologies.slice(0,3).map((tech, index) => (
+                        {item.technologies.slice(0,20).map((tech, index) => (
                           <span
                             key={index}
                             className="bg-gray-700 text-yellow-500 px-2 py-1 rounded-full text-xs"
