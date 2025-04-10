@@ -82,7 +82,284 @@ const Portfolio = () => {
         "Data Filtering",
         "Performance Metrics"
       ]
-    }
+    },
+    {
+      images: [
+        "/assets/primred.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Web Application",
+      title: "Prime Referral",
+      description:
+        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
+      client: "Prime Referral",
+      alt: "Prime Referral Dashboard Screenshots",
+      projectLink: "https://primereferral.us/",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+      features: [
+        "Lead Generation Services",
+        "Smart Lead Filtering",
+        "Real-Time Analytics",
+        "Performance Tracking",
+        "Client Dashboard"
+      ]
+    },
+    {
+      images: [
+        "/assets/bathleganza.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Web Application",
+      title: "Prime Referral",
+      description:
+        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
+      client: "Prime Referral",
+      alt: "Prime Referral Dashboard Screenshots",
+      projectLink: "https://primereferral.us/",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+      features: [
+        "Lead Generation Services",
+        "Smart Lead Filtering",
+        "Real-Time Analytics",
+        "Performance Tracking",
+        "Client Dashboard"
+      ]
+    },
+    {
+      images: [
+        "/assets/drapfit.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Web Application",
+      title: "Prime Referral",
+      description:
+        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
+      client: "Prime Referral",
+      alt: "Prime Referral Dashboard Screenshots",
+      projectLink: "https://primereferral.us/",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+      features: [
+        "Lead Generation Services",
+        "Smart Lead Filtering",
+        "Real-Time Analytics",
+        "Performance Tracking",
+        "Client Dashboard"
+      ]
+    },
+    {
+      images: [
+        "/assets/serniore.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Web Application",
+      title: "Prime Referral",
+      description:
+        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
+      client: "Prime Referral",
+      alt: "Prime Referral Dashboard Screenshots",
+      projectLink: "https://primereferral.us/",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+      features: [
+        "Lead Generation Services",
+        "Smart Lead Filtering",
+        "Real-Time Analytics",
+        "Performance Tracking",
+        "Client Dashboard"
+      ]
+    },
+    {
+      images: [
+        "/assets/discoverlore.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Web Application",
+      title: "Prime Referral",
+      description:
+        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
+      client: "Prime Referral",
+      alt: "Prime Referral Dashboard Screenshots",
+      projectLink: "https://primereferral.us/",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+      features: [
+        "Lead Generation Services",
+        "Smart Lead Filtering",
+        "Real-Time Analytics",
+        "Performance Tracking",
+        "Client Dashboard"
+      ]
+    },
+    {
+      images: [
+        "/assets/quranoneline.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Web Application",
+      title: "Prime Referral",
+      description:
+        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
+      client: "Prime Referral",
+      alt: "Prime Referral Dashboard Screenshots",
+      projectLink: "https://primereferral.us/",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+      features: [
+        "Lead Generation Services",
+        "Smart Lead Filtering",
+        "Real-Time Analytics",
+        "Performance Tracking",
+        "Client Dashboard"
+      ]
+    },
+    {
+      images: [
+        "/assets/egrowly.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Web Application",
+      title: "Prime Referral",
+      description:
+        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
+      client: "Prime Referral",
+      alt: "Prime Referral Dashboard Screenshots",
+      projectLink: "https://primereferral.us/",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+      features: [
+        "Lead Generation Services",
+        "Smart Lead Filtering",
+        "Real-Time Analytics",
+        "Performance Tracking",
+        "Client Dashboard"
+      ]
+    },
+    {
+      images: [
+        "/assets/iscs-uk.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Web Application",
+      title: "Prime Referral",
+      description:
+        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
+      client: "Prime Referral",
+      alt: "Prime Referral Dashboard Screenshots",
+      projectLink: "https://primereferral.us/",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+      features: [
+        "Lead Generation Services",
+        "Smart Lead Filtering",
+        "Real-Time Analytics",
+        "Performance Tracking",
+        "Client Dashboard"
+      ]
+    },
+    {
+      images: [
+        "/assets/abadzone.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Web Application",
+      title: "Prime Referral",
+      description:
+        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
+      client: "Prime Referral",
+      alt: "Prime Referral Dashboard Screenshots",
+      projectLink: "https://primereferral.us/",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+      features: [
+        "Lead Generation Services",
+        "Smart Lead Filtering",
+        "Real-Time Analytics",
+        "Performance Tracking",
+        "Client Dashboard"
+      ]
+    },
+    {
+      images: [
+        "/assets/virrgotech.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Web Application",
+      title: "Prime Referral",
+      description:
+        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
+      client: "Prime Referral",
+      alt: "Prime Referral Dashboard Screenshots",
+      projectLink: "https://primereferral.us/",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+      features: [
+        "Lead Generation Services",
+        "Smart Lead Filtering",
+        "Real-Time Analytics",
+        "Performance Tracking",
+        "Client Dashboard"
+      ]
+    },
+    {
+      images: [
+        "/assets/lfmaudio.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Web Application",
+      title: "Prime Referral",
+      description:
+        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
+      client: "Prime Referral",
+      alt: "Prime Referral Dashboard Screenshots",
+      projectLink: "https://primereferral.us/",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+      features: [
+        "Lead Generation Services",
+        "Smart Lead Filtering",
+        "Real-Time Analytics",
+        "Performance Tracking",
+        "Client Dashboard"
+      ]
+    },
+    {
+      images: [
+        "/assets/whitepinefunding.png",
+        "/assets/dashboard-2.png",
+        "/assets/dashboard-3.png",
+        "/assets/dashboard-4.png"
+      ],
+      category: "Web Application",
+      title: "Prime Referral",
+      description:
+        "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics, smart lead filtering, and detailed performance tracking.",
+      client: "Prime Referral",
+      alt: "Prime Referral Dashboard Screenshots",
+      projectLink: "https://primereferral.us/",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js", "Redux"],
+      features: [
+        "Lead Generation Services",
+        "Smart Lead Filtering",
+        "Real-Time Analytics",
+        "Performance Tracking",
+        "Client Dashboard"
+      ]
+    },
+    
   ];
 
   const fadeInUp = {
