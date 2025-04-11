@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { SidebarMenu } from "@/components/SidebarMenu";
 
 const Portfolio = () => {
   const [isClient, setIsClient] = useState(false);
@@ -465,7 +466,7 @@ const Portfolio = () => {
           </motion.p>
         </motion.div>
       </header>
-
+<SidebarMenu/>
       {/* Portfolio Grid - Mobile Responsive */}
       <motion.div
         className="max-w-6xl mx-auto px-4"
@@ -608,7 +609,7 @@ const Portfolio = () => {
           </AnimatePresence>
         </div>
       </motion.div>
-
+{/* <SidebarMenu/> */}
       {/* Project Details Modal - Mobile Responsive */}
       <AnimatePresence>
         {selectedItem && (

@@ -279,14 +279,14 @@ export default function Home() {
 
   // Download CV handler
   const handleDownloadCV = () => {
-    // Create an anchor element and set the href to the file path
     const link = document.createElement('a');
-    link.href = '/path-to-your-cv.pdf'; // Set the path to your CV file
-    link.download = 'Shahab-Gul-CV.pdf'; // Set the desired filename
+    link.href = '/assets/ShahabGul-SoftwareDeveloper.pdf'; // Correct path from public folder
+    link.download = 'ShahabGul-SoftwareDeveloper.pdf'; // Desired filename
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
+  
 
   // Updated navigation icons with more modern design
   const NavIcons = {
@@ -1062,7 +1062,7 @@ export default function Home() {
                       }}
                     >
                       <motion.span
-                        className={`${textAccent} font-extrabold drop-shadow-sm`}
+                        className={`${textAccent} font-extrabold drop-shadow-sm ml-[10px]`}
                         animate={{
                           textShadow: ["0px 0px 0px rgba(245, 158, 11, 0)", "0px 0px 15px rgba(245, 158, 11, 0.7)", "0px 0px 0px rgba(245, 158, 11, 0)"]
                         }}
@@ -1079,12 +1079,12 @@ export default function Home() {
                 </motion.div>
 
                 <motion.h2
-                  className={`text-4xl font-bold leading-tight ${textPrimary} drop-shadow-sm my-4`}
+                  className={`text-4xl font-bold leading-tight ml-[79px] ${textPrimary} drop-shadow-sm my-4`}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.4, duration: 0.6 }}
                 >
-                  Web Developer &
+                  J. Full Stack Developer
                   <motion.span
                     className={`${textAccent} ml-2 inline-block font-extrabold`}
                     animate={{
@@ -1098,12 +1098,12 @@ export default function Home() {
                       ease: "easeInOut"
                     }}
                   >
-                    Designer
+                     & Designer
                   </motion.span>
                 </motion.h2>
 
                 <motion.p
-                  className={`text-xl ${textTertiary} max-w-xl leading-relaxed font-medium`}
+                  className={`text-xl ${textTertiary} max-w-xl leading-relaxed font-medium ml-[80px]`}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.6, duration: 0.6 }}
@@ -1127,7 +1127,7 @@ export default function Home() {
                     onMouseLeave={leaveHover}
                     className="inline-flex items-center px-10 py-5 bg-transparent border-2 border-yellow-500 
                     text-white-500 hover:bg-yellow-500 hover:text-white 
-                    rounded-full transition-all duration-500 ease-in-out transform hover:shadow-xl text-lg"
+                    rounded-full transition-all duration-500 ease-in-out transform hover:shadow-xl text-lg ml-[80px]"
                   >
                     <motion.span
                       className="mr-3 text-xl"
@@ -1196,7 +1196,7 @@ export default function Home() {
                   ))}
                 </motion.div> */}
                 <motion.div
-                  className="flex space-x-5 mt-6"
+                  className="flex space-x-5 mt-6 ml-[80px]"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 2, duration: 0.6 }}
