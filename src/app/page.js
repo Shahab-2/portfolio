@@ -11,6 +11,7 @@ export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [cursorVariant, setCursorVariant] = useState("default");
   const [downloadAnimation, setDownloadAnimation] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // Import fonts in useEffect to ensure they're loaded
   useEffect(() => {
@@ -32,8 +33,12 @@ export default function Home() {
     `;
     document.head.appendChild(fontStylesElement);
 
+    // Set loaded state after fonts are loaded
+    const timer = setTimeout(() => setIsLoaded(true), 500);
+
     return () => {
       document.head.removeChild(fontStylesElement);
+      clearTimeout(timer);
     };
   }, []);
 
@@ -73,18 +78,7 @@ export default function Home() {
   const rotateXSpring = useSpring(rotateX, { stiffness: 500, damping: 50 });
   const rotateYSpring = useSpring(rotateY, { stiffness: 500, damping: 50 });
 
-  // Tech icons with improved configuration for animations
-  const techIcons = [
-    { name: 'react', color: '#61DAFB', size: 28, position: { left: '15%', top: '20%' }, delay: 0 },
-    { name: 'node-js', color: '#339933', size: 32, position: { left: '75%', top: '15%' }, delay: 0.5 },
-    { name: 'js', color: '#F7DF1E', size: 26, position: { left: '25%', top: '75%' }, delay: 1 },
-    { name: 'html5', color: '#E34F26', size: 30, position: { left: '65%', top: '65%' }, delay: 1.5 },
-    { name: 'css3-alt', color: '#1572B6', size: 28, position: { left: '85%', top: '40%' }, delay: 2 },
-    { name: 'git-alt', color: '#F05032', size: 24, position: { left: '10%', top: '45%' }, delay: 2.5 },
-    { name: 'sass', color: '#CC6699', size: 28, position: { left: '40%', top: '10%' }, delay: 3 },
-    { name: 'vuejs', color: '#4FC08D', size: 22, position: { left: '35%', top: '85%' }, delay: 3.5 },
-    { name: 'npm', color: '#CB3837', size: 26, position: { left: '15%', top: '60%' }, delay: 4 },
-  ];
+
 
   useEffect(() => {
     const checkMobile = () => {
@@ -174,117 +168,78 @@ export default function Home() {
     setDownloadAnimation(false);
   };
 
-  // Enhanced animation variants
+  // Simplified animation variants
   const buttonVariants = {
-    initial: { scale: 1, opacity: 0.8 },
+    initial: { scale: 1, opacity: 0.9 },
     hover: {
-      scale: 1.05,
+      scale: 1.02,
       opacity: 1,
-      boxShadow: "0 10px 25px -5px rgba(245, 158, 11, 0.3)",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10,
-        duration: 0.3
-      }
+      transition: { duration: 0.2 }
     },
     tap: {
-      scale: 0.95,
-      transition: { duration: 0.2 }
+      scale: 0.98,
+      transition: { duration: 0.1 }
     }
   };
 
   // Download button animation
   const downloadButtonVariants = {
-    initial: { scale: 1, opacity: 0.8 },
+    initial: { scale: 1, opacity: 0.9 },
     hover: {
-      scale: 1.08,
+      scale: 1.03,
       opacity: 1,
-      boxShadow: "0 20px 35px -10px rgba(245, 158, 11, 0.5)",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10,
-        duration: 0.3
-      }
+      transition: { duration: 0.2 }
     },
     tap: {
-      scale: 0.92,
-      transition: { duration: 0.2 }
+      scale: 0.97,
+      transition: { duration: 0.1 }
     }
   };
 
   const contentVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.6,
         ease: "easeOut",
-        staggerChildren: 0.2
+        staggerChildren: 0.1
       }
     }
   };
 
   const childVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" }
+      transition: { duration: 0.4, ease: "easeOut" }
     }
   };
 
-  // Tech icon animations
-  const techIconVariants = {
-    initial: { opacity: 0, scale: 0, rotate: -10 },
-    animate: (custom) => ({
-      opacity: [0.15, 0.3, 0.15],
-      scale: [1, 1.1, 1],
-      rotate: [-2, 2, -2],
-      filter: ["blur(0px)", "blur(1px)", "blur(0px)"],
-      transition: {
-        duration: 8,
-        delay: custom.delay,
-        repeat: Infinity,
-        repeatType: "mirror",
-        ease: "easeInOut",
-      }
-    }),
-    hover: {
-      opacity: 0.6,
-      scale: 1.2,
-      rotate: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.3 }
-    }
-  };
 
-  // Mobile tech icon variants 
-  const mobileTechIconVariants = {
-    initial: { opacity: 0, scale: 0 },
-    animate: (custom) => ({
-      opacity: [0.3, 0.6, 0.3],
-      scale: [0.8, 1, 0.8],
-      rotate: [-5, 5, -5],
-      transition: {
-        duration: 6,
-        delay: custom.delay % 3,
-        repeat: Infinity,
-        repeatType: "mirror",
-      }
-    })
-  };
 
-  // Download CV handler
+  // Download CV handler with improved user feedback
   const handleDownloadCV = () => {
+    // Add loading state
+    setDownloadAnimation(true);
+    
     const link = document.createElement('a');
-    link.href = '/assets/ShahabGul-SoftwareDeveloper.pdf'; // Correct path from public folder
-    link.download = 'ShahabGul-SoftwareDeveloper.pdf'; // Desired filename
+    link.href = '/assets/ShahabGul-SoftwareDeveloper.pdf';
+    link.download = 'ShahabGul-SoftwareDeveloper.pdf';
+    
+    // Add success feedback
+    link.onload = () => {
+      setTimeout(() => setDownloadAnimation(false), 2000);
+    };
+    
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    
+    // Reset animation after a delay
+    setTimeout(() => setDownloadAnimation(false), 2000);
   };
   
 
@@ -365,44 +320,7 @@ export default function Home() {
     </motion.div>
   );
 
-  // Enhanced Theme Toggle Button
-  const ThemeToggle = () => (
-    <motion.button
-      variants={buttonVariants}
-      initial="initial"
-      whileHover="hover"
-      whileTap="tap"
-      onMouseEnter={enterButton}
-      onMouseLeave={leaveHover}
-      className="w-14 h-14 bg-gray-800/70 rounded-full flex items-center justify-center text-white hover:bg-gray-700 transition-all duration-500 backdrop-blur-sm"
-      onClick={() => setDarkMode(!darkMode)}
-    >
-      <motion.div
-        animate={{ rotate: darkMode ? 0 : 180 }}
-        transition={{ duration: 0.5 }}
-      >
-        {darkMode ? (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        )}
-      </motion.div>
-    </motion.button>
-  );
+
 
   // Animated gradient background
   const gradientColors = darkMode ?
@@ -421,15 +339,17 @@ export default function Home() {
   return (
     <motion.div
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      animate={{ opacity: isLoaded ? 1 : 0 }}
       transition={{ duration: 0.8 }}
       className={`${textPrimary} font-sans
         min-h-screen transition-colors duration-700 overflow-hidden bg-gradient-to-br ${gradientColors}`}
       ref={containerRef}
     >
       <Head>
-        <title>Shahab Gul - Web Designer & Front-end Developer</title>
-        <meta name="description" content="Portfolio of Shahab Gul, Web Designer & Front-end Developer" />
+        <title>Shahab Gul - Full Stack Developer & UI/UX Designer</title>
+        <meta name="description" content="Portfolio of Shahab Gul, Full Stack Developer & UI/UX Designer specializing in modern web applications and user experience design" />
+        <meta name="keywords" content="Full Stack Developer, UI/UX Designer, React, Node.js, JavaScript, Portfolio" />
+        <meta name="author" content="Shahab Gul" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -442,89 +362,14 @@ export default function Home() {
         />
       )}
 
-      {/* Floating background elements - Enhanced with more variations */}
-      {!isMobile && (
-        <>
-          {[...Array(4)].map((_, i) => (
-            <motion.div
-              key={`float-${i}`}
-              className={`absolute rounded-full blur-3xl opacity-20 ${i % 3 === 0 ? 'bg-yellow-300/10' :
-                  i % 3 === 1 ? 'bg-yellow-500/10' : 'bg-blue-500/5'
-                }`}
-              style={{
-                width: `${100 + (i * 30)}px`,
-                height: `${100 + (i * 30)}px`,
-                top: `${15 + (i * 20)}%`,
-                left: `${10 + (i * 15)}%`,
-                zIndex: 1
-              }}
-              animate={{
-                y: [0, -15, 0],
-                x: [0, i % 2 === 0 ? 10 : -10, 0],
-                rotate: [0, i % 2 === 0 ? 5 : -5, 0],
-                transition: {
-                  duration: 5 + (i * 0.5),
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }
-              }}
-            />
-          ))}
-        </>
-      )}
 
-      {/* Enhanced Tech Icons - Desktop Version */}
-      {!isMobile && (
-        <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          {techIcons.map((icon, index) => (
-            <motion.div
-              key={`tech-${icon.name}`}
-              className="absolute"
-              style={{
-                ...icon.position,
-                fontSize: `${icon.size}px`,
-                color: darkMode ? `${icon.color}20` : `${icon.color}15`,
-                zIndex: 0,
-              }}
-              variants={techIconVariants}
-              custom={{ delay: icon.delay }}
-              initial="initial"
-              animate="animate"
-              whileHover="hover"
-            >
-              <i className={`fab fa-${icon.name}`}></i>
-            </motion.div>
-          ))}
-        </div>
-      )}
 
-      {/* Mobile Tech Icons - Simplified and fewer */}
-      {isMobile && (
-        <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-          {techIcons.slice(0, 5).map((icon, index) => (
-            <motion.div
-              key={`mobile-tech-${icon.name}`}
-              className="absolute"
-              style={{
-                left: `${10 + (index * 20)}%`,
-                top: `${10 + ((index % 3) * 25)}%`,
-                fontSize: `${icon.size * 0.7}px`,
-                color: darkMode ? `${icon.color}25` : `${icon.color}15`,
-              }}
-              variants={mobileTechIconVariants}
-              custom={{ delay: index }}
-              initial="initial"
-              animate="animate"
-            >
-              <i className={`fab fa-${icon.name}`}></i>
-            </motion.div>
-          ))}
-        </div>
-      )}
+
+
+      
 
       {/* Enhanced Desktop Side Navigation */}
       <div className="hidden lg:flex fixed right-10 top-1/2 transform -translate-y-1/2 flex-col gap-6 z-20">
-        <ThemeToggle />
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -536,31 +381,57 @@ export default function Home() {
           }}
           className="space-y-6"
         >
-          <NavButton
-            href="/"
-            icon={NavIcons.home}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
-          <NavButton
-            href="/about"
-            icon={NavIcons.about}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
-          <NavButton
-            href="/portfolio"
-            icon={NavIcons.portfolio}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
-          <NavButton
-            href="/contact"
-            icon={NavIcons.contact}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
-          <NavButton
-            href="#"
-            icon={NavIcons.chat}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
+          {/* Home */}
+          <motion.div className="group relative">
+            <NavButton
+              href="/"
+              icon={NavIcons.home}
+              className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
+            />
+            <div className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              Home
+              <div className="absolute left-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-l-4 border-l-gray-800 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
+            </div>
+          </motion.div>
+
+          {/* About */}
+          <motion.div className="group relative">
+            <NavButton
+              href="/about"
+              icon={NavIcons.about}
+              className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
+            />
+            <div className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              About
+              <div className="absolute left-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-l-4 border-l-gray-800 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
+            </div>
+          </motion.div>
+
+          {/* Projects */}
+          <motion.div className="group relative">
+            <NavButton
+              href="/portfolio"
+              icon={NavIcons.portfolio}
+              className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
+            />
+            <div className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              Projects
+              <div className="absolute left-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-l-4 border-l-gray-800 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
+            </div>
+          </motion.div>
+
+          {/* Contact Us */}
+          <motion.div className="group relative">
+            <NavButton
+              href="/contact"
+              icon={NavIcons.contact}
+              className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
+            />
+            <div className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              Contact Us
+              <div className="absolute left-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-l-4 border-l-gray-800 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -593,11 +464,6 @@ export default function Home() {
             icon={NavIcons.contact}
             className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
           />
-          <NavButton
-            href="/chat"
-            icon={NavIcons.chat}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
         </motion.div>
       </div>
 
@@ -617,110 +483,49 @@ export default function Home() {
               exit={{ opacity: 0, y: -20 }}
             >
               <motion.div
-                initial={{ scale: 0, rotate: -10 }}
-                animate={{ scale: 1, rotate: 0 }}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
                 transition={{
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 20,
+                  duration: 0.6,
                   delay: 0.2
                 }}
-                className="relative w-52 h-52 rounded-2xl overflow-hidden shadow-2xl"
+                className="relative w-64 h-64 rounded-full overflow-hidden shadow-lg border-2 border-white bg-white"
                 style={{
-                  boxShadow: "0 25px 50px -12px rgba(245, 158, 11, 0.25)",
-                  transform: "perspective(1000px) rotateX(10deg) rotateY(-10deg)"
+                  boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.2)"
                 }}
-                whileHover={{ scale: 1.05, rotateX: 0, rotateY: 0 }}
+                whileHover={{ scale: 1.02 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500 to-yellow-300 opacity-30 z-10" />
                 <Image
-                  src="/shahab.jpeg"
+                  src="/shahabprofile.png"
                   alt="Shahab Gul"
                   fill
                   priority
                   className="object-cover"
                 />
-                {/* Animated frame around image */}
-                <motion.div
-                  className="absolute inset-0 border-4 border-yellow-400 z-20 rounded-2xl"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                >
-                  {/* Corner decorations */}
-                  {[
-                    "top-0 left-0 origin-top-left",
-                    "top-0 right-0 origin-top-right",
-                    "bottom-0 left-0 origin-bottom-left",
-                    "bottom-0 right-0 origin-bottom-right"
-                  ].map((position, i) => (
-                    <motion.div
-                      key={`corner-${i}`}
-                      className={`absolute w-8 h-8 ${position}`}
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.7 + (i * 0.1), duration: 0.3 }}
-                    >
-                      <motion.div
-                        className="absolute top-0 left-0 w-2 h-8 bg-yellow-400 rounded-full"
-                        animate={{ rotate: 0 }}
-                        initial={{ rotate: i % 2 === 0 ? -90 : 0 }}
-                      />
-                      <motion.div
-                        className="absolute top-0 left-0 w-8 h-2 bg-yellow-400 rounded-full"
-                        animate={{ rotate: 0 }}
-                        initial={{ rotate: i % 2 === 0 ? 0 : 90 }}
-                      />
-                    </motion.div>
-                  ))}
-                </motion.div>
+
               </motion.div>
 
               <div className="space-y-4">
                 <motion.h1
                   variants={childVariants}
-                  className="text-4xl font-bold"
+                  className="text-3xl font-bold"
                 >
-                  <motion.span
-                    className={`${textAccent} inline-block font-extrabold`}
-                    animate={{
-                      textShadow: ["0px 0px 0px rgba(245, 158, 11, 0)", "0px 0px 10px rgba(245, 158, 11, 0.5)", "0px 0px 0px rgba(245, 158, 11, 0)"]
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      repeatType: "reverse"
-                    }}
-                  >
-                    Shahab
-                  </motion.span> <span className="tracking-wide">Gul</span>
+                  <span className={`${textAccent} font-extrabold`}>Shahab</span> <span className="tracking-wide">Gul</span>
                 </motion.h1>
 
                 <motion.div
                   variants={childVariants}
-                  className="flex items-center justify-center space-x-2"
+                  className="flex items-center justify-center"
                 >
-                  <motion.span
-                    className="w-8 h-1 bg-yellow-500 rounded-full"
-                    initial={{ width: 0 }}
-                    animate={{ width: "2rem" }}
-                    transition={{ duration: 0.8, delay: 1 }}
-                  />
-                  <h2 className={`text-base font-semibold tracking-wide ${textSecondary}`}>Web Designer & Developer</h2>
-                  <motion.span
-                    className="w-8 h-1 bg-yellow-500 rounded-full"
-                    initial={{ width: 0 }}
-                    animate={{ width: "2rem" }}
-                    transition={{ duration: 0.8, delay: 1.2 }}
-                  />
+                  <h2 className={`text-sm font-semibold tracking-wide ${textSecondary}`}>Full Stack Web Developer</h2>
                 </motion.div>
 
                 <motion.p
                   variants={childVariants}
-                  className={`${textTertiary} max-w-md mx-auto text-sm leading-relaxed font-medium ${letterSpacing}`}
+                  className={`${textTertiary} max-w-md mx-auto text-xs leading-relaxed font-medium ${letterSpacing}`}
                 >
-                  A passionate web designer and front-end developer creating
-                  clean, user-friendly digital experiences that make a difference.
+                  A passionate full-stack developer and UI/UX designer crafting
+                  innovative digital solutions that combine functionality with stunning design.
                 </motion.p>
               </div>
 
@@ -733,78 +538,44 @@ export default function Home() {
                   whileTap="tap"
                   onMouseEnter={enterDownload}
                   onMouseLeave={leaveHover}
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-500 to-yellow-400
-                  text-black font-medium shadow-xl rounded-full transition duration-500 ease-in-out transform group"
+                  className="inline-flex items-center px-6 py-3 bg-yellow-500 text-black font-medium shadow-lg rounded-full transition duration-300 text-sm"
                 >
-                  <motion.span
-                    animate={{
-                      y: [0, -3, 0]
-                    }}
-                    transition={{
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                      duration: 1.5
-                    }}
-                    className="mr-2"
-                  >
+                  <span className="mr-2">
                     {NavIcons.download}
-                  </motion.span>
+                  </span>
                   Download CV
-                  <motion.span
-                    className="ml-2"
-                    animate={{
-                      scale: [1, 1.2, 1],
-                      opacity: [1, 0.8, 1]
-                    }}
-                    transition={{
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                      duration: 1.5
-                    }}
-                  >
-                    ✓
-                  </motion.span>
                 </motion.button>
               </motion.div>
 
-              {/* Social Media Icons for Mobile with staggered bounce animation */}
+                            {/* Social Media Icons for Mobile */}
               <motion.div
                 className="flex space-x-5 mt-6"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2, duration: 0.6 }}
+                transition={{ delay: 1.5, duration: 0.4 }}
               >
                 {[
-                  { name: 'github', url: 'https://github.com/yourusername' },
-                  { name: 'linkedin', url: 'https://linkedin.com/in/yourusername' },
-                  { name: 'behance', url: 'https://behance.net/yourusername' }
+                  { name: 'github', url: 'https://github.com/Shahab-2' },
+                  { name: 'linkedin', url: 'https://www.linkedin.com/in/shahabgul22/' },
+                  { name: 'behance', url: 'https://www.behance.net/shahabgul' }
                 ].map((social, index) => (
                   <motion.a
                     key={social.name}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-20 h-20 rounded-full bg-gray-800/70 flex items-center justify-center text-gray-300 hover:bg-yellow-500 hover:text-black transition-all duration-300"
-                    whileHover={{ scale: 1.1, y: -3, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
+                    className="w-12 h-12 rounded-full bg-gray-800/70 flex items-center justify-center text-gray-300 hover:bg-yellow-500 hover:text-black transition-all duration-300"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onMouseEnter={enterLink}
                     onMouseLeave={leaveHover}
-                    initial={{ scale: 0.8, opacity: 0 }}
+                    initial={{ opacity: 0 }}
                     animate={{
-                      scale: 1,
                       opacity: 1,
-                      transition: {
-                        type: "spring",
-                        stiffness: 500,
-                        damping: 30,
-                        delay: 2.1 + (index * 0.1)
-                      }
+                      transition: { delay: 1.6 + (index * 0.1) }
                     }}
                   >
-                    <motion.i
-                      className={`fab fa-${social.name} text-lg`}
-                      whileHover={{ rotate: 360, transition: { duration: 0.5 } }}
-                    />
+                    <i className={`fab fa-${social.name} text-base`} />
                   </motion.a>
                 ))}
               </motion.div>
@@ -828,71 +599,16 @@ export default function Home() {
                 }}
                 style={{ originX: 0, originY: 1 }}
               >
-                {/* Interactive particles on yellow background */}
-                <div className="absolute w-full h-full">
-                  {[...Array(20)].map((_, i) => (
-                    <motion.div
-                      key={`particle-${i}`}
-                      className="absolute w-2 h-2 rounded-full bg-black/20"
-                      style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                      }}
-                      animate={{
-                        x: [0, (Math.random() * 50) - 25, 0],
-                        y: [0, (Math.random() * 50) - 25, 0],
-                        opacity: [0.1, 0.3, 0.1],
-                        scale: [1, Math.random() + 1, 1],
-                      }}
-                      transition={{
-                        duration: 5 + Math.random() * 5,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        ease: "easeInOut",
-                        delay: Math.random() * 2,
-                      }}
-                    />
-                  ))}
-                </div>
 
-                {/* Moving geometric shapes */}
-                <motion.div
-                  className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full border-8 border-black/10"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    x: [0, 20, 0],
-                    y: [0, -20, 0],
-                    rotate: [0, 45, 0]
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    duration: 15,
-                    ease: "easeInOut"
-                  }}
-                />
-                <motion.div
-                  className="absolute top-20 right-10 w-40 h-40 rounded-3xl border-4 border-black/10 rotate-12"
-                  animate={{
-                    scale: [1, 0.8, 1],
-                    rotate: [12, -10, 12]
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    duration: 12,
-                    ease: "easeInOut"
-                  }}
-                />
+
+
               </motion.div>
 
               <motion.div
-                initial={{ x: -100, opacity: 0 }}
+                initial={{ x: -50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 20,
+                  duration: 0.6,
                   delay: 0.3
                 }}
                 className="flex justify-center items-center relative z-20"
@@ -900,130 +616,39 @@ export default function Home() {
                 style={{ y: imageY }}
               >
                 <motion.div
-                  initial={{ scale: 0.8, rotate: -5 }}
-                  animate={{ scale: 1, rotate: 0 }}
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
                   transition={{
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 20,
+                    duration: 0.6,
                     delay: 0.6
                   }}
-                  className="relative w-70 h-70 rounded-2xl overflow-hidden 
-                    shadow-2xl border-8 border-white z-20"
+                  className="relative w-70 h-70 rounded-full overflow-hidden 
+                    shadow-lg border-4 border-white bg-white z-20"
                   style={{
-                    transform: "perspective(1000px) rotateY(-15deg)",
-                    boxShadow: "0 25px 60px -15px rgba(0, 0, 0, 0.3)"
+                    boxShadow: "0 15px 40px -10px rgba(0, 0, 0, 0.2)"
                   }}
                   whileHover={{
-                    scale: 1.05,
-                    rotateY: 0,
-                    transition: { duration: 0.3 }
+                    scale: 1.02,
+                    transition: { duration: 0.2 }
                   }}
                 >
                   {/* Profile image with interactive overlay effects */}
                   <Image
-                    src="/shahab.jpeg"
+                    src="/shahabprofile.png"
                     alt="Shahab Gul"
                     fill
                     priority
                     className="object-cover"
                   />
 
-                  {/* Animated overlay effects */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-yellow-500/40"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1, duration: 1 }}
-                  />
 
-                  {/* Interactive scan line effect */}
-                  <motion.div
-                    className="absolute left-0 w-full h-10 bg-yellow-500/20 backdrop-blur-sm"
-                    initial={{ top: "-10%", opacity: 0 }}
-                    animate={{
-                      top: ["0%", "100%"],
-                      opacity: [0, 0.5, 0]
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      repeatDelay: 1,
-                      ease: "easeInOut"
-                    }}
-                  />
 
-                  {/* Animated frame */}
-                  <motion.div
-                    className="absolute inset-0 border-4 border-yellow-400/50 rounded-lg z-10"
-                    initial={{ opacity: 0, scale: 1.1 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.5, duration: 0.8 }}
-                  >
-                    {/* Corner decorations */}
-                    {[
-                      "top-0 left-0 origin-top-left",
-                      "top-0 right-0 origin-top-right",
-                      "bottom-0 left-0 origin-bottom-left",
-                      "bottom-0 right-0 origin-bottom-right"
-                    ].map((position, i) => (
-                      <motion.div
-                        key={`corner-${i}`}
-                        className={`absolute w-10 h-10 ${position}`}
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 1.7 + (i * 0.1), duration: 0.5 }}
-                      >
-                        <motion.div
-                          className="absolute top-0 left-0 w-2 h-10 bg-yellow-400 rounded-full"
-                          animate={{ rotate: 0 }}
-                          initial={{ rotate: i % 2 === 0 ? -90 : 0 }}
-                        />
-                        <motion.div
-                          className="absolute top-0 left-0 w-10 h-2 bg-yellow-400 rounded-full"
-                          animate={{ rotate: 0 }}
-                          initial={{ rotate: i % 2 === 0 ? 0 : 90 }}
-                        />
-                      </motion.div>
-                    ))}
-                  </motion.div>
+
+
+
                 </motion.div>
 
-                {/* Decorative elements around image with enhanced animations */}
-                <motion.div
-                  className="absolute -bottom-10 -left-10 w-24 h-24 bg-yellow-400 rounded-lg z-10"
-                  initial={{ opacity: 0, scale: 0, rotate: -20 }}
-                  animate={{ opacity: 0.7, scale: 1, rotate: 0 }}
-                  transition={{ delay: 1, duration: 0.5, type: "spring" }}
-                  whileHover={{
-                    scale: 1.1,
-                    rotate: 5,
-                    transition: { duration: 0.3 }
-                  }}
-                />
-                <motion.div
-                  className="absolute -top-5 -right-5 w-16 h-16 bg-yellow-500 rounded-full z-10"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 0.5, scale: 1 }}
-                  transition={{ delay: 1.2, duration: 0.5, type: "spring" }}
-                  whileHover={{
-                    scale: 1.2,
-                    transition: { duration: 0.3 }
-                  }}
-                />
 
-                {/* Additional decorative element with animation */}
-                <motion.div
-                  className="absolute top-1/4 -right-20 w-20 h-20 rounded-md bg-yellow-300/30 backdrop-blur-sm z-5"
-                  initial={{ opacity: 0, x: 20, rotate: 45 }}
-                  animate={{ opacity: 0.8, x: 0, rotate: 25 }}
-                  transition={{ delay: 1.8, duration: 0.6 }}
-                  whileHover={{
-                    rotate: 0,
-                    scale: 1.1,
-                    transition: { duration: 0.3 }
-                  }}
-                />
               </motion.div>
 
               <motion.div
@@ -1050,56 +675,27 @@ export default function Home() {
                       transition={{ duration: 0.8, delay: 1 }}
                       className="h-1 bg-yellow-500 rounded-full"
                     ></motion.div>
-                    <motion.h1
-                      className="text-4xl font-bold"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        delay: 1.2,
-                        duration: 0.5,
-                        type: "spring",
-                        stiffness: 200
-                      }}
-                    >
-                      <motion.span
-                        className={`${textAccent} font-extrabold drop-shadow-sm ml-[10px]`}
-                        animate={{
-                          textShadow: ["0px 0px 0px rgba(245, 158, 11, 0)", "0px 0px 15px rgba(245, 158, 11, 0.7)", "0px 0px 0px rgba(245, 158, 11, 0)"]
-                        }}
-                        transition={{
-                          duration: 3,
-                          repeat: Infinity,
-                          repeatType: "reverse"
-                        }}
-                      >
-                        Shahab
-                      </motion.span> <span className="tracking-wide">Gul</span>
-                    </motion.h1>
+                                    <motion.h1
+                  className="text-4xl font-bold"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: 1.2,
+                    duration: 0.5
+                  }}
+                >
+                  <span className={`${textAccent} font-extrabold ml-[10px]`}>Shahab</span> <span className="tracking-wide">Gul</span>
+                </motion.h1>
                   </div>
                 </motion.div>
 
                 <motion.h2
-                  className={`text-4xl font-bold leading-tight ml-[79px] ${textPrimary} drop-shadow-sm my-4`}
+                  className={`text-4xl font-bold leading-tight ml-[79px] ${textPrimary} my-4`}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.4, duration: 0.6 }}
                 >
-                  J. Full Stack Developer
-                  <motion.span
-                    className={`${textAccent} ml-2 inline-block font-extrabold`}
-                    animate={{
-                      rotateX: [0, 10, 0],
-                      rotateY: [0, -5, 0]
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                      ease: "easeInOut"
-                    }}
-                  >
-                     & Designer
-                  </motion.span>
+                  Full Stack Web Developer
                 </motion.h2>
 
                 <motion.p
@@ -1108,8 +704,8 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.6, duration: 0.6 }}
                 >
-                  A passionate web designer and front-end developer creating
-                  clean, user-friendly digital experiences that make a difference.
+                  A passionate full-stack developer and UI/UX designer crafting
+                  innovative digital solutions that combine functionality with stunning design.
                 </motion.p>
 
                 <motion.div
@@ -1126,37 +722,13 @@ export default function Home() {
                     onMouseEnter={enterDownload}
                     onMouseLeave={leaveHover}
                     className="inline-flex items-center px-10 py-5 bg-transparent border-2 border-yellow-500 
-                    text-white-500 hover:bg-yellow-500 hover:text-white 
-                    rounded-full transition-all duration-500 ease-in-out transform hover:shadow-xl text-lg ml-[80px]"
+                    text-white hover:bg-yellow-500 hover:text-black 
+                    rounded-full transition-all duration-300 text-lg ml-[80px]"
                   >
-                    <motion.span
-                      className="mr-3 text-xl"
-                      animate={{
-                        y: [0, -4, 0]
-                      }}
-                      transition={{
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        duration: 1.5
-                      }}
-                    >
+                    <span className="mr-3 text-xl">
                       {NavIcons.download}
-                    </motion.span>
+                    </span>
                     Download CV
-                    <motion.span
-                      className="ml-2 opacity-0 group-hover:opacity-100"
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0, 1, 0]
-                      }}
-                      transition={{
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        duration: 2
-                      }}
-                    >
-                      ✓
-                    </motion.span>
                   </motion.button>
                 </motion.div>
 
@@ -1197,9 +769,9 @@ export default function Home() {
                 </motion.div> */}
                 <motion.div
                   className="flex space-x-5 mt-6 ml-[80px]"
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 2, duration: 0.6 }}
+                  transition={{ delay: 1.8, duration: 0.4 }}
                 >
                   {[
                     { name: 'github', url: 'https://github.com/Shahab-2' },
@@ -1211,100 +783,179 @@ export default function Home() {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-20 h-20 rounded-full bg-gray-800/70 flex items-center justify-center text-gray-300 hover:bg-yellow-500 hover:text-black transition-all duration-300"
-                      whileHover={{ scale: 1.1, y: -3, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
+                      className="w-14 h-14 rounded-full bg-gray-800/70 flex items-center justify-center text-gray-300 hover:bg-yellow-500 hover:text-black transition-all duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       onMouseEnter={enterLink}
                       onMouseLeave={leaveHover}
-                      initial={{ scale: 0.8, opacity: 0 }}
+                      initial={{ opacity: 0 }}
                       animate={{
-                        scale: 1,
                         opacity: 1,
-                        transition: {
-                          type: "spring",
-                          stiffness: 500,
-                          damping: 30,
-                          delay: 2.1 + (index * 0.1)
-                        }
+                        transition: { delay: 1.9 + (index * 0.1) }
                       }}
                     >
-                      <motion.i
-                        className={`fab fa-${social.name} text-lg`}
-                        whileHover={{ rotate: 360, transition: { duration: 0.5 } }}
-                      />
+                      <i className={`fab fa-${social.name} text-base`} />
                     </motion.a>
                   ))}
                 </motion.div>
 
-                {/* Experience Stats with enhanced 3D hover effect */}
-                <motion.div
-                  className="grid grid-cols-3 gap-6 mt-8"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 2.4, duration: 0.6 }}
-                >
-                  {[
-                    { number: '2+', label: 'Years Experience' },
-                    { number: '10+', label: 'Projects Completed' },
-                    { number: '10+', label: 'Happy Clients' }
-                  ].map((stat, index) => (
-                    <motion.div
-                      key={index}
-                      className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center justify-center transition-all duration-300"
-                      whileHover={{
-                        y: -8,
-                        scale: 1.05,
-                        boxShadow: "0 15px 30px -10px rgba(0, 0, 0, 0.3)",
-                        background: "rgba(30, 30, 30, 0.4)",
-                      }}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{
-                        opacity: 1,
-                        scale: 1,
-                        transition: { delay: 2.5 + (index * 0.1) }
-                      }}
-                    >
-                      <motion.span
-                        className={`text-3xl font-extrabold ${textAccent}`}
-                        animate={{
-                          scale: [1, 1.1, 1],
-                          textShadow: ["0px 0px 0px rgba(245, 158, 11, 0)", "0px 0px 10px rgba(245, 158, 11, 0.5)", "0px 0px 0px rgba(245, 158, 11, 0)"]
-                        }}
-                        transition={{
-                          repeat: Infinity,
-                          repeatType: "reverse",
-                          duration: 3,
-                          delay: index * 0.5
-                        }}
-                      >
-                        {stat.number}
-                      </motion.span>
-                      <span className={`text-xs font-medium ${textSecondary} mt-1`}>{stat.label}</span>
-                    </motion.div>
-                  ))}
-                </motion.div>
+
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
       </motion.main>
 
-      {/* Typing cursor effect on dark theme only */}
-      {darkMode && !isMobile && (
-        <motion.div
-          className="fixed bottom-5 left-5 w-4 h-10 bg-yellow-500/70"
-          animate={{
-            opacity: [1, 0, 1],
-            scaleY: [1, 0.9, 1]
-          }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut"
-          }}
-        />
-      )}
+      {/* Projects Section */}
+      <section className="py-20 bg-gray-900/50 backdrop-blur-sm">
+        <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${textPrimary}`}>
+              Featured <span className={textAccent}>Projects</span>
+            </h2>
+            <p className={`text-lg ${textTertiary} max-w-2xl mx-auto`}>
+              Explore my latest work showcasing innovative web solutions and creative designs
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Human Resource Management System",
+                category: "HRM System Website",
+                description: "A comprehensive HR management platform with advanced employee tracking, performance management features, and intuitive user interface design.",
+                image: "/assets/ikmal.png",
+                link: "https://www.ikmal.sa/",
+                technologies: ["React.js", "Next.js", "MySQL", "Bootstrap", "Node.js", "Express.js"]
+              },
+              {
+                title: "Prime Referral",
+                category: "Lead Generation Website",
+                description: "A cutting-edge lead generation platform designed to connect businesses with high-quality prospects. Features real-time analytics and smart lead filtering.",
+                image: "/assets/primred.png",
+                link: "https://primereferral.us/",
+                technologies: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "Node.js", "Redux"]
+              },
+              {
+                title: "Drap Fit",
+                category: "E-commerce Website",
+                description: "A modern e-commerce platform designed to provide a seamless shopping experience with product browsing, smart filtering, and secure checkout.",
+                image: "/assets/drapfit.png",
+                link: "https://www.drapefit.com/",
+                technologies: ["React.js", "Next.js", "MySQL", "Tailwind CSS", "Redux Toolkit", "Node.js"]
+              },
+              {
+                title: "Discover Local Lore",
+                category: "Tourism Web Application",
+                description: "An immersive tourism platform that helps users explore hidden gems, local attractions, and cultural experiences with interactive maps.",
+                image: "/assets/discoverlore.png",
+                link: "https://discoverlocallore.com/",
+                technologies: ["Next.js", "React.js", "MUI Material UI", "Tailwind CSS", "MongoDB", "Node.js"]
+              },
+              {
+                title: "Quran Online",
+                category: "Web Application",
+                description: "An online platform designed to provide high-quality Quran tutoring with personalized lessons, live sessions, and interactive learning tools.",
+                image: "/assets/quranoneline.png",
+                link: "https://quranoneline.com/",
+                technologies: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "Node.js", "Redux"]
+              },
+              {
+                title: "Egrowly",
+                category: "Web Application",
+                description: "A social platform for community-driven discussions, similar to Reddit. Users can post, comment, vote, and engage in discussions across various topics.",
+                image: "/assets/egrowly.png",
+                link: "https://egrowly.com/",
+                technologies: ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "MongoDB", "Node.js"]
+              }
+            ].map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group relative bg-gray-800/30 backdrop-blur-sm rounded-xl overflow-hidden hover:bg-gray-800/50 transition-all duration-300"
+                whileHover={{ y: -10 }}
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <motion.a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-yellow-500 text-black px-6 py-3 rounded-full font-medium hover:bg-yellow-400 transition-colors duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      View Project
+                    </motion.a>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <div className="mb-2">
+                    <span className="text-yellow-500 text-sm font-medium">{project.category}</span>
+                  </div>
+                  <h3 className={`text-xl font-bold mb-3 ${textPrimary} group-hover:text-yellow-500 transition-colors duration-300`}>
+                    {project.title}
+                  </h3>
+                  <p className={`text-sm ${textTertiary} mb-4 line-clamp-3`}>
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.slice(0, 4).map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded-full"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.technologies.length > 4 && (
+                      <span className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded-full">
+                        +{project.technologies.length - 4} more
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <motion.a
+              href="/portfolio"
+              className="inline-flex items-center px-8 py-4 bg-yellow-500 text-black font-medium rounded-full hover:bg-yellow-400 transition-colors duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View All Projects
+              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </motion.a>
+          </motion.div>
+        </div>
+      </section>
+
     </motion.div>
   );
 }

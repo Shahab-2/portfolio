@@ -137,13 +137,6 @@ export default function MobileNavigation({
           className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
           activeClassName={activePage === '/contact' ? (darkMode ? 'bg-yellow-500 text-black' : 'bg-yellow-500') : ''}
         />
-        <NavButton 
-          href="/chat" 
-          icon={NavIcons.chat} 
-          label="Chat"
-          className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          activeClassName={activePage === '/chat' ? (darkMode ? 'bg-yellow-500 text-black' : 'bg-yellow-500') : ''}
-        />
       </motion.div>
     </div>
   );

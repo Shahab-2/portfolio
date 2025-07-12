@@ -48,30 +48,10 @@ export const Sidebar = () => {
       </Link>
     </motion.div>
   );
-      // Theme Toggle Button
-  const ThemeToggle = () => (
-    <motion.button 
-      variants={buttonVariants}
-      whileHover="hover"
-      whileTap="tap"
-      className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-white hover:bg-gray-700 transition-colors duration-300"
-      onClick={() => setDarkMode(!darkMode)}
-    >
-      {darkMode ? (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-      ) : (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-      )}
-    </motion.button>
-  );
+
   return (
 <>
     <div className="hidden lg:flex fixed right-8 top-1/2 transform -translate-y-1/2 flex-col gap-6 z-20">
-      <ThemeToggle />
       <NavButton 
         href="/" 
         icon={NavIcons.home} 
@@ -90,11 +70,6 @@ export const Sidebar = () => {
       <NavButton 
         href="/contact" 
         icon={NavIcons.contact} 
-        className="bg-gray-800 text-white hover:bg-yellow-500 hover:text-black"
-      />
-      <NavButton 
-        href="/chat" 
-        icon={NavIcons.chat} 
         className="bg-gray-800 text-white hover:bg-yellow-500 hover:text-black"
       />
     </div>
