@@ -226,8 +226,8 @@ export default function Home() {
     setDownloadAnimation(true);
     
     const link = document.createElement('a');
-    link.href = '/assets/ShahabGul-SoftwareDeveloper.pdf';
-    link.download = 'ShahabGul-SoftwareDeveloper.pdf';
+    link.href = '/assets/ShahabGul-SofwareDeveloper-Resume.pdf';
+    link.download = 'ShahabGul-SofwareDeveloper-Resume.pdf';
     
     // Add success feedback
     link.onload = () => {
