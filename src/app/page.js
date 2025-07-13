@@ -303,6 +303,13 @@ export default function Home() {
       <Link
         href={href}
         className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 backdrop-blur-sm group ${className} ${activeClassName}`}
+        style={{
+          background: className.includes('bg-gray-800/70') 
+            ? 'linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.8) 100%)'
+            : className.includes('bg-yellow-500')
+            ? 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
+            : 'linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.8) 100%)'
+        }}
       >
         <motion.div
           initial={{ scale: 0.8 }}
@@ -322,7 +329,7 @@ export default function Home() {
 
 
 
-  // Animated gradient background
+  // Animated gradient background with linear gradients
   const gradientColors = darkMode ?
     "from-gray-900 via-gray-800 to-black" :
     "from-white via-gray-100 to-gray-200";
@@ -343,6 +350,11 @@ export default function Home() {
       transition={{ duration: 0.8 }}
       className={`${textPrimary} font-sans
         min-h-screen transition-colors duration-700 overflow-hidden bg-gradient-to-br ${gradientColors}`}
+      style={{
+        background: darkMode 
+          ? 'linear-gradient(135deg, #111827 0%, #1f2937 50%, #000000 100%)'
+          : 'linear-gradient(135deg, #ffffff 0%, #f3f4f6 50%, #e5e7eb 100%)'
+      }}
       ref={containerRef}
     >
       <Head>
@@ -436,7 +448,10 @@ export default function Home() {
       </div>
 
       {/* Enhanced Mobile Bottom Navigation with bounce animation */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-gray-900/80 backdrop-blur-lg z-20 py-4">
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 backdrop-blur-lg z-20 py-4"
+        style={{
+          background: 'linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(31, 41, 55, 0.8) 100%)'
+        }}>
         <motion.div
           initial={{ y: 100 }}
           animate={{ y: 0 }}
@@ -538,7 +553,10 @@ export default function Home() {
                   whileTap="tap"
                   onMouseEnter={enterDownload}
                   onMouseLeave={leaveHover}
-                  className="inline-flex items-center px-6 py-3 bg-yellow-500 text-black font-medium shadow-lg rounded-full transition duration-300 text-sm"
+                  className="inline-flex items-center px-6 py-3 text-black font-medium shadow-lg rounded-full transition duration-300 text-sm"
+                  style={{
+                    background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
+                  }}
                 >
                   <span className="mr-2">
                     {NavIcons.download}
@@ -564,11 +582,20 @@ export default function Home() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full bg-gray-800/70 flex items-center justify-center text-gray-300 hover:bg-yellow-500 hover:text-black transition-all duration-300"
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-gray-300 transition-all duration-300"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onMouseEnter={enterLink}
-                    onMouseLeave={leaveHover}
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.8) 100%)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+                      enterLink();
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = 'linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.8) 100%)';
+                      leaveHover();
+                    }}
                     initial={{ opacity: 0 }}
                     animate={{
                       opacity: 1,
@@ -589,7 +616,7 @@ export default function Home() {
             >
               {/* Enhanced Yellow Background Section with interactive particles */}
               <motion.div
-                className="absolute left-0 top-0 bottom-0 w-1/2 bg-gradient-to-br from-yellow-400 to-yellow-600 z-10 
+                className="absolute left-0 top-0 bottom-0 w-1/2 z-10 
                   shadow-2xl overflow-hidden"
                 initial={{ skewX: 0 }}
                 animate={{ skewX: -10 }}
@@ -597,7 +624,11 @@ export default function Home() {
                   duration: 1.2,
                   ease: "easeOut"
                 }}
-                style={{ originX: 0, originY: 1 }}
+                style={{ 
+                  originX: 0, 
+                  originY: 1,
+                  background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)'
+                }}
               >
 
 
@@ -719,11 +750,20 @@ export default function Home() {
                     initial="initial"
                     whileHover="hover"
                     whileTap="tap"
-                    onMouseEnter={enterDownload}
-                    onMouseLeave={leaveHover}
-                    className="inline-flex items-center px-10 py-5 bg-transparent border-2 border-yellow-500 
-                    text-white hover:bg-yellow-500 hover:text-black 
+                    className="inline-flex items-center px-10 py-5 border-2 border-yellow-500 
+                    text-white hover:text-black 
                     rounded-full transition-all duration-300 text-lg ml-[80px]"
+                    style={{
+                      background: 'linear-gradient(135deg, transparent 0%, transparent 100%)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+                      enterDownload();
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = 'linear-gradient(135deg, transparent 0%, transparent 100%)';
+                      leaveHover();
+                    }}
                   >
                     <span className="mr-3 text-xl">
                       {NavIcons.download}
@@ -783,11 +823,20 @@ export default function Home() {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-14 h-14 rounded-full bg-gray-800/70 flex items-center justify-center text-gray-300 hover:bg-yellow-500 hover:text-black transition-all duration-300"
+                      className="w-14 h-14 rounded-full flex items-center justify-center text-gray-300 transition-all duration-300"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      onMouseEnter={enterLink}
-                      onMouseLeave={leaveHover}
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.8) 100%)'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+                        enterLink();
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.background = 'linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.8) 100%)';
+                        leaveHover();
+                      }}
                       initial={{ opacity: 0 }}
                       animate={{
                         opacity: 1,
@@ -807,7 +856,10 @@ export default function Home() {
       </motion.main>
 
       {/* Projects Section */}
-      <section className="py-20 bg-gray-900/50 backdrop-blur-sm">
+      <section className="py-20 backdrop-blur-sm"
+        style={{
+          background: 'linear-gradient(135deg, rgba(17, 24, 39, 0.5) 0%, rgba(31, 41, 55, 0.5) 100%)'
+        }}>
         <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -881,7 +933,16 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative bg-gray-800/30 backdrop-blur-sm rounded-xl overflow-hidden hover:bg-gray-800/50 transition-all duration-300"
+                className="group relative backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(31, 41, 55, 0.3) 0%, rgba(17, 24, 39, 0.3) 100%)'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = 'linear-gradient(135deg, rgba(31, 41, 55, 0.5) 0%, rgba(17, 24, 39, 0.5) 100%)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = 'linear-gradient(135deg, rgba(31, 41, 55, 0.3) 0%, rgba(17, 24, 39, 0.3) 100%)';
+                }}
                 whileHover={{ y: -10 }}
               >
                 <div className="relative h-48 overflow-hidden">
@@ -896,7 +957,16 @@ export default function Home() {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-yellow-500 text-black px-6 py-3 rounded-full font-medium hover:bg-yellow-400 transition-colors duration-300"
+                      className="text-black px-6 py-3 rounded-full font-medium transition-colors duration-300"
+                      style={{
+                        background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.background = 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+                      }}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -943,7 +1013,16 @@ export default function Home() {
           >
             <motion.a
               href="/portfolio"
-              className="inline-flex items-center px-8 py-4 bg-yellow-500 text-black font-medium rounded-full hover:bg-yellow-400 transition-colors duration-300"
+              className="inline-flex items-center px-8 py-4 text-black font-medium rounded-full transition-colors duration-300"
+              style={{
+                background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+              }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
