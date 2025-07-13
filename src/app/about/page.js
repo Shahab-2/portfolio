@@ -1,35 +1,36 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import MobileNavigation from '@/components/MobileView';
 
 const Resume = () => {
   const [isClient, setIsClient] = useState(false);
-  const [activeSection, setActiveSection] = useState('about');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [downloadAnimation, setDownloadAnimation] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
-    
-    // Add smooth scrolling for anchor links
-    const handleScroll = () => {
-      const sections = document.querySelectorAll('section[id]');
-      const scrollPosition = window.scrollY + 100;
-
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          setActiveSection(sectionId);
-        }
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Download CV handler with improved user feedback
+  const handleDownloadCV = () => {
+    // Add loading state
+    setDownloadAnimation(true);
+    
+    const link = document.createElement('a');
+    link.href = '/assets/ShahabGul-SofwareDeveloper-Resume.pdf';
+    link.download = 'ShahabGul-SofwareDeveloper-Resume.pdf';
+    
+    // Add success feedback
+    link.onload = () => {
+      setTimeout(() => setDownloadAnimation(false), 2000);
+    };
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Reset animation after a delay
+    setTimeout(() => setDownloadAnimation(false), 2000);
+  };
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
@@ -55,27 +56,37 @@ const Resume = () => {
 
   const skills = [
     { name: 'HTML', level: 95, color: '#E44D26' },
-    { name: 'CSS', level: 89, color: '#F7DF1E' },
-    { name: 'JavaScript', level: 88, color: '#264DE4' },
-    { name: 'REACT.JS', level: 88, color: '#777BB3' },
-    { name: 'NEXT.JS', level: 95, color: '#21759B' },
-    { name: 'NODE.JS', level: 95, color: '#21759B' },
-    { name: 'EXPRESS.JS', level: 95, color: '#21759B' },
-    { name: 'WORDPRESS', level: 80, color: '#0769AD' },
+    { name: 'CSS', level: 92, color: '#1572B6' },
+    { name: 'JavaScript', level: 90, color: '#F7DF1E' },
+    { name: 'TypeScript', level: 85, color: '#3178C6' },
+    { name: 'React.js', level: 88, color: '#61DAFB' },
+    { name: 'Next.js', level: 90, color: '#000000' },
+    { name: 'Node.js', level: 88, color: '#339933' },
+    { name: 'Express.js', level: 85, color: '#000000' },
+    { name: 'MongoDB', level: 82, color: '#47A248' },
+    { name: 'PostgreSQL', level: 80, color: '#336791' },
+    { name: 'Git', level: 88, color: '#F05032' },
+    { name: 'Docker', level: 75, color: '#2496ED' },
   ];
 
   const experiences = [
     {
-      period: '2023 - PRESENT',
+      period: 'APRIL 2025 - PRESENT',
+      title: 'FULL STACK ENGINEER',
+      company: 'DROPPGROUP',
+      description: 'Leading development of cutting-edge AI-powered applications and Web 3.0 solutions. Specializing in blockchain integration, smart contracts, and decentralized applications (DApps). Implementing advanced AI algorithms and machine learning models for predictive analytics and automation. Collaborating with cross-functional teams to architect scalable solutions using modern technologies like React, Node.js, and blockchain frameworks.'
+    },
+    {
+      period: '2023 - 2025',
       title: 'SOFTWARE DEVELOPER',
       company: 'CODE ENTERPRISE PVT LTD.',
-      description: 'Led cross-functional teams in developing responsive web applications. Implemented CI/CD pipelines and mentored junior developers on best practices.'
+      description: 'Developed and maintained multiple SaaS products serving diverse client needs. Led end-to-end development of enterprise web applications using React.js, Node.js, and cloud technologies. Implemented CI/CD pipelines, automated testing, and deployment strategies. Mentored junior developers and established coding standards. Specialized in building scalable microservices architecture and RESTful APIs.'
     },
     {
       period: '2022 - 2023',
       title: 'FRONT END DEVELOPER',
       company: 'SURG ENGINE MEDIA PVT LTD.',
-      description: 'Led cross-functional teams in developing responsive web applications. Implemented CI/CD pipelines and mentored junior developers on best practices.'
+      description: 'Built responsive and interactive user interfaces for web applications using modern JavaScript frameworks. Collaborated with design teams to implement pixel-perfect designs and ensure optimal user experience. Optimized application performance, implemented responsive design principles, and ensured cross-browser compatibility. Worked on multiple client projects delivering high-quality frontend solutions.'
     }
   ];
 
@@ -189,17 +200,7 @@ const Resume = () => {
     );
   };
 
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop,
-        behavior: 'smooth'
-      });
-    }
-    setActiveSection(sectionId);
-    setIsMenuOpen(false);
-  };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white relative font-sans">
@@ -210,140 +211,22 @@ const Resume = () => {
         <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-purple-500 rounded-full opacity-5 blur-3xl"></div>
       </div>
 
-      {/* Mobile Menu Button */}
-      <div className="fixed top-4 right-4 z-50 md:hidden">
-        <motion.button 
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="w-12 h-12 bg-gray-800 border border-gray-700 rounded-full flex items-center justify-center transition-colors duration-300 focus:outline-none"
+
+
+      {/* Back to Home Button */}
+      <div className="fixed top-8 left-8 z-50">
+        <motion.a 
+          href="/"
+          className="w-14 h-14 bg-gray-800 hover:bg-yellow-500 rounded-full flex items-center justify-center transition-colors duration-300 group border border-gray-700 hover:border-yellow-500 shadow-lg"
+          whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-        >
-          <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'} text-white`}></i>
-        </motion.button>
-      </div>
-
-      {/* Mobile Navigation Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, x: 300 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 300 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed inset-y-0 right-0 z-40 w-64 bg-gray-800 bg-opacity-95 backdrop-blur-sm shadow-xl md:hidden"
-          >
-            <div className="p-6 flex flex-col h-full">
-              <div className="mb-8 pb-4 border-b border-gray-700">
-                <h2 className="text-xl font-bold">Shahab <span className="text-yellow-500">Gul</span></h2>
-                <p className="text-gray-400 text-sm">Web Developer</p>
-              </div>
-              <nav className="flex-1">
-                <ul className="space-y-4">
-                  <li>
-                    <button 
-                      onClick={() => scrollToSection('about')}
-                      className={`flex items-center text-left w-full px-4 py-2 rounded-lg transition-colors ${activeSection === 'about' ? 'bg-yellow-500 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
-                    >
-                      <i className="fas fa-user mr-3"></i> About
-                    </button>
-                  </li>
-                  <li>
-                    <button 
-                      onClick={() => scrollToSection('skills')}
-                      className={`flex items-center text-left w-full px-4 py-2 rounded-lg transition-colors ${activeSection === 'skills' ? 'bg-yellow-500 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
-                    >
-                      <i className="fas fa-code mr-3"></i> Skills
-                    </button>
-                  </li>
-                  <li>
-                    <button 
-                      onClick={() => scrollToSection('experience')}
-                      className={`flex items-center text-left w-full px-4 py-2 rounded-lg transition-colors ${activeSection === 'experience' ? 'bg-yellow-500 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
-                    >
-                      <i className="fas fa-briefcase mr-3"></i> Experience
-                    </button>
-                  </li>
-                  <li>
-                    <button 
-                      onClick={() => scrollToSection('contact')}
-                      className={`flex items-center text-left w-full px-4 py-2 rounded-lg transition-colors ${activeSection === 'contact' ? 'bg-yellow-500 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
-                    >
-                      <i className="fas fa-envelope mr-3"></i> Contact
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-              <div className="pt-4 border-t border-gray-700 flex space-x-3">
-                <a href="#" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-yellow-500 transition-colors">
-                  <i className="fab fa-linkedin-in"></i>
-                </a>
-                <a href="#" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-yellow-500 transition-colors">
-                  <i className="fab fa-github"></i>
-                </a>
-                <a href="#" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-yellow-500 transition-colors">
-                  <i className="fab fa-dribbble"></i>
-                </a>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Desktop Navigation Icons */}
-      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50 hidden md:block">
-        <motion.div 
-          className="flex flex-col space-y-6"
-          initial={{ opacity: 0, x: 50 }}
+          initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          <motion.button 
-            className={`w-14 h-14 rounded-full flex items-center justify-center transition-colors duration-300 group ${activeSection === 'about' ? 'bg-yellow-500' : 'bg-gray-800 hover:bg-gray-700'}`}
-            onClick={() => scrollToSection('about')}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <i className={`fas fa-user text-xl ${activeSection === 'about' ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}></i>
-            <span className="absolute right-16 bg-gray-800 text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">About Me</span>
-          </motion.button>
-          <motion.button 
-            className={`w-14 h-14 rounded-full flex items-center justify-center transition-colors duration-300 group ${activeSection === 'skills' ? 'bg-yellow-500' : 'bg-gray-800 hover:bg-gray-700'}`}
-            onClick={() => scrollToSection('skills')}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <i className={`fas fa-code text-xl ${activeSection === 'skills' ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}></i>
-            <span className="absolute right-16 bg-gray-800 text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">My Skills</span>
-          </motion.button>
-          <motion.button 
-            className={`w-14 h-14 rounded-full flex items-center justify-center transition-colors duration-300 group ${activeSection === 'experience' ? 'bg-yellow-500' : 'bg-gray-800 hover:bg-gray-700'}`}
-            onClick={() => scrollToSection('experience')}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <i className={`fas fa-briefcase text-xl ${activeSection === 'experience' ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}></i>
-            <span className="absolute right-16 bg-gray-800 text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Experience</span>
-          </motion.button>
-          <motion.button 
-            className={`w-14 h-14 rounded-full flex items-center justify-center transition-colors duration-300 group ${activeSection === 'contact' ? 'bg-yellow-500' : 'bg-gray-800 hover:bg-gray-700'}`}
-            onClick={() => scrollToSection('contact')}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <i className={`fas fa-envelope text-xl ${activeSection === 'contact' ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}></i>
-            <span className="absolute right-16 bg-gray-800 text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Contact</span>
-          </motion.button>
-          <div className="h-px w-8 bg-gray-700 mx-auto"></div>
-          <motion.a 
-            href="#" 
-            className="w-14 h-14 bg-gray-800 hover:bg-yellow-500 rounded-full flex items-center justify-center transition-colors duration-300 group"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <i className="fas fa-download text-xl text-gray-300 group-hover:text-white"></i>
-            <span className="absolute right-16 bg-gray-800 text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Download CV</span>
-          </motion.a>
-          <MobileNavigation/>
-        </motion.div>
+          <i className="fas fa-arrow-left text-xl text-gray-300 group-hover:text-white"></i>
+          <span className="absolute left-16 bg-gray-800 text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Back to Home</span>
+        </motion.a>
       </div>
 
       {/* Header */}
@@ -424,7 +307,7 @@ const Resume = () => {
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Age:</p>
-                <p className="font-medium text-lg">24 Years</p>
+                <p className="font-medium text-lg">25 Years</p>
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Nationality:</p>
@@ -440,15 +323,15 @@ const Resume = () => {
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Phone:</p>
-                <p className="font-medium text-lg">+923155463297</p>
+                <p className="font-medium text-lg break-all">+923155463297</p>
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Email:</p>
-                <p className="font-medium text-lg">shahabgul117@gmail.com</p>
+                <p className="font-medium text-lg break-all">shahabgul117@gmail.com</p>
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Skype:</p>
-                <p className="font-medium text-lg">live:.cid.9ec40613bfef8a5e</p>
+                <p className="font-medium text-lg break-all">live:.cid.9ec40613bfef8a5e</p>
               </div>
               <div className="mb-2">
                 <p className="text-sm text-gray-400 mb-1">Languages:</p>
@@ -456,11 +339,12 @@ const Resume = () => {
               </div>
             </div>
             <motion.button 
+              onClick={handleDownloadCV}
               className="mt-8 px-8 py-4 bg-gray-900 hover:bg-yellow-500 transition-colors duration-300 rounded-xl flex items-center font-medium text-sm uppercase tracking-wider group shadow-lg hover:shadow-xl"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {/* <span>DOWNLOAD CV</span>  */}
+              <span className={downloadAnimation ? 'animate-pulse' : ''}>DOWNLOAD CV</span>
               <span className="relative ml-2 w-6 h-6 flex items-center justify-center overflow-hidden rounded-full bg-yellow-500 group-hover:bg-white transition-colors">
                 <i className="fas fa-download text-gray-900 text-xs"></i>
               </span>
@@ -481,7 +365,7 @@ const Resume = () => {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                2<sup>+</sup>
+                3<sup>+</sup>
               </motion.h2>
               <div className="w-12 h-1 bg-yellow-500 my-3 rounded-full"></div>
               <p className="text-sm text-gray-300 text-center font-medium tracking-wider uppercase">YEARS OF<br />EXPERIENCE</p>
@@ -499,7 +383,7 @@ const Resume = () => {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 400, damping: 10, delay: 0.1 }}
               >
-                10<sup>+</sup>
+                15<sup>+</sup>
               </motion.h2>
               <div className="w-12 h-1 bg-yellow-500 my-3 rounded-full"></div>
               <p className="text-sm text-gray-300 text-center font-medium tracking-wider uppercase">COMPLETED<br />PROJECTS</p>
@@ -517,7 +401,7 @@ const Resume = () => {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 400, damping: 10, delay: 0.2 }}
               >
-                10<sup>+</sup>
+                12<sup>+</sup>
               </motion.h2>
               <div className="w-12 h-1 bg-yellow-500 my-3 rounded-full"></div>
               <p className="text-sm text-gray-300 text-center font-medium tracking-wider uppercase">HAPPY<br />CUSTOMERS</p>
@@ -691,24 +575,182 @@ const Resume = () => {
             </span>
             ADDITIONAL TOOLS & TECHNOLOGIES
           </h4>
-          <div className="flex flex-wrap gap-3">
-            {["Git", "Docker", "AWS", "Bootstrap", "MongoDB", "GraphQL", "TypeScript", "Next.js", "TailwindCSS", "Node.js", "Express", "Material UI"].map((tool, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {[
+              { name: "AWS", category: "Cloud" },
+              { name: "Vercel", category: "Deployment" },
+              { name: "Netlify", category: "Deployment" },
+              { name: "TailwindCSS", category: "Styling" },
+              { name: "Bootstrap", category: "Styling" },
+              { name: "Material UI", category: "UI Library" },
+              { name: "GraphQL", category: "API" },
+              { name: "REST APIs", category: "API" },
+              { name: "Jest", category: "Testing" },
+              { name: "Cypress", category: "Testing" },
+              { name: "Webpack", category: "Build Tools" },
+              { name: "Vite", category: "Build Tools" }
+            ].map((tool, index) => (
               <motion.div 
                 key={index}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="px-4 py-2 bg-gray-700 bg-opacity-50 rounded-full text-sm font-medium hover:bg-yellow-500 hover:text-gray-900 transition-colors duration-300 cursor-default"
+                className="px-4 py-3 bg-gray-700 bg-opacity-50 rounded-lg text-sm font-medium hover:bg-yellow-500 hover:text-gray-900 transition-colors duration-300 cursor-default group"
               >
-                {tool}
+                <div className="font-semibold">{tool.name}</div>
+                <div className="text-xs text-gray-400 group-hover:text-gray-700">{tool.category}</div>
               </motion.div>
             ))}
           </div>
         </motion.div>
       </motion.section>
-            {/* Footer */}
-            {/* <footer className="py-8 px-4 text-center text-gray-400 border-t border-gray-800">
+
+      {/* Contact Section */}
+      <motion.section 
+        id="contact"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={fadeInUp}
+        className="max-w-6xl mx-auto px-4 py-20 pt-10"
+      >
+        <div className="text-center mb-16">
+          <motion.div
+            variants={fadeInUp}
+            className="inline-block"
+          >
+            <h3 className="text-3xl font-bold relative inline-block">
+              <span className="relative z-10">
+                <span className="text-white">GET IN</span> <span className="text-yellow-500">TOUCH</span>
+              </span>
+              <motion.span 
+                className="absolute -bottom-1 left-0 w-full h-3 bg-yellow-500 opacity-20 rounded-sm"
+                initial={{ width: 0 }}
+                whileInView={{ width: "100%" }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+              ></motion.span>
+            </h3>
+          </motion.div>
+          <motion.p 
+            variants={fadeInUp}
+            className="max-w-xl mx-auto text-gray-400 mt-4"
+          >
+            Let's discuss your next project and bring your ideas to life
+          </motion.p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <motion.div 
+            variants={fadeInUp}
+            className="bg-gray-800 bg-opacity-40 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 hover:border-gray-600 transition-colors duration-300 shadow-xl"
+          >
+            <h4 className="text-xl font-bold mb-8 flex items-center">
+              <span className="w-8 h-8 bg-yellow-500 rounded-lg flex items-center justify-center mr-3">
+                <i className="fas fa-envelope text-gray-900 text-sm"></i>
+              </span>
+              CONTACT INFORMATION
+            </h4>
+            <div className="space-y-6">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
+                  <i className="fas fa-envelope text-gray-900"></i>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Email</p>
+                  <p className="text-white font-medium break-all">shahabgul117@gmail.com</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
+                  <i className="fas fa-phone text-gray-900"></i>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Phone</p>
+                  <p className="text-white font-medium break-all">+923155463297</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
+                  <i className="fas fa-map-marker-alt text-gray-900"></i>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Location</p>
+                  <p className="text-white font-medium">Islamabad, Pakistan</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
+                  <i className="fab fa-skype text-gray-900"></i>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Skype</p>
+                  <p className="text-white font-medium">live:.cid.9ec40613bfef8a5e</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            variants={fadeInUp}
+            className="bg-gray-800 bg-opacity-40 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 hover:border-gray-600 transition-colors duration-300 shadow-xl"
+          >
+            <h4 className="text-xl font-bold mb-8 flex items-center">
+              <span className="w-8 h-8 bg-yellow-500 rounded-lg flex items-center justify-center mr-3">
+                <i className="fas fa-share-alt text-gray-900 text-sm"></i>
+              </span>
+              SOCIAL LINKS
+            </h4>
+            <div className="grid grid-cols-2 gap-4">
+              <motion.a 
+                href="#" 
+                className="flex items-center space-x-3 p-4 bg-gray-700 bg-opacity-50 rounded-lg hover:bg-yellow-500 hover:text-gray-900 transition-colors duration-300 group"
+                whileHover={{ y: -2 }}
+              >
+                <i className="fab fa-linkedin-in text-xl"></i>
+                <span className="font-medium">LinkedIn</span>
+              </motion.a>
+              <motion.a 
+                href="#" 
+                className="flex items-center space-x-3 p-4 bg-gray-700 bg-opacity-50 rounded-lg hover:bg-yellow-500 hover:text-gray-900 transition-colors duration-300 group"
+                whileHover={{ y: -2 }}
+              >
+                <i className="fab fa-github text-xl"></i>
+                <span className="font-medium">GitHub</span>
+              </motion.a>
+              <motion.a 
+                href="#" 
+                className="flex items-center space-x-3 p-4 bg-gray-700 bg-opacity-50 rounded-lg hover:bg-yellow-500 hover:text-gray-900 transition-colors duration-300 group"
+                whileHover={{ y: -2 }}
+              >
+                <i className="fab fa-twitter text-xl"></i>
+                <span className="font-medium">Twitter</span>
+              </motion.a>
+              <motion.a 
+                href="#" 
+                className="flex items-center space-x-3 p-4 bg-gray-700 bg-opacity-50 rounded-lg hover:bg-yellow-500 hover:text-gray-900 transition-colors duration-300 group"
+                whileHover={{ y: -2 }}
+              >
+                <i className="fab fa-dribbble text-xl"></i>
+                <span className="font-medium">Dribbble</span>
+              </motion.a>
+            </div>
+            <motion.button 
+              onClick={handleDownloadCV}
+              className="mt-8 w-full px-8 py-4 bg-yellow-500 hover:bg-yellow-400 transition-colors duration-300 rounded-xl flex items-center justify-center font-medium text-gray-900 text-sm uppercase tracking-wider group shadow-lg hover:shadow-xl"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span className={downloadAnimation ? 'animate-pulse' : ''}>DOWNLOAD RESUME</span>
+              <i className="fas fa-download ml-2"></i>
+            </motion.button>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Footer */}
+      <footer className="py-8 px-4 text-center text-gray-400 border-t border-gray-800">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-center space-x-4 mb-4">
             <motion.a 
@@ -740,9 +782,9 @@ const Resume = () => {
               <i className="fab fa-dribbble"></i>
             </motion.a>
           </div>
-          <p className="text-sm">© {new Date().getFullYear()} Steve Milner. All rights reserved.</p>
+          <p className="text-sm">© {new Date().getFullYear()} Shahab Gul. All rights reserved.</p>
         </div>
-      </footer> */}
+      </footer>
     </div>
   );
 };

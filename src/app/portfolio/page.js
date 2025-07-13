@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { SidebarMenu } from "@/components/SidebarMenu";
+
 
 const Portfolio = () => {
   const [isClient, setIsClient] = useState(false);
@@ -11,6 +11,8 @@ const Portfolio = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
+  const [currentPage, setCurrentPage] = useState(1);
+  const projectsPerPage = 4;
   
   useEffect(() => {
     setIsClient(true);
@@ -41,6 +43,7 @@ const Portfolio = () => {
       ]
     },
     {
+      id: 2,
       images: [
         "/assets/primred.png",
         "/assets/dashboard-2.png",
@@ -64,6 +67,7 @@ const Portfolio = () => {
       ]
     },
     {
+      id: 3,
       images: [
         "/assets/drapfit.png",
         "/assets/shop-product.png",
@@ -86,8 +90,8 @@ const Portfolio = () => {
         "Secure Checkout with Order Tracking"
       ]
     },
-    
     {
+      id: 4,
       images: [
         "/assets/discoverlore.png",
         "/assets/dashboard-2.png",
@@ -110,8 +114,8 @@ const Portfolio = () => {
         "Responsive Design for All Devices"
       ]
     },
-    
     {
+      id: 5,
       images: [
         "/assets/quranoneline.png",
         "/assets/dashboard-2.png",
@@ -133,9 +137,9 @@ const Portfolio = () => {
         "Teacher-Student Communication",
         "Quranic Resources & Study Materials"
       ]
-    }
-    ,
+    },
     {
+      id: 6,
       images: [
         "/assets/egrowly.png",
         "/assets/dashboard-2.png",
@@ -158,9 +162,8 @@ const Portfolio = () => {
         "User Profiles & Engagement"
       ]
     },
-    
-
     {
+      id: 7,
       images: [
         "/assets/iscs-uk.png",
         "/assets/dashboard-2.png",
@@ -183,8 +186,8 @@ const Portfolio = () => {
         "Logistics & Shipment Management"
       ]
     },
-    
     {
+      id: 8,
       images: [
         "/assets/serniore.png",
         "/assets/dashboard-2.png",
@@ -206,10 +209,9 @@ const Portfolio = () => {
         "Custom Interactive Elements",
         "Optimized for All Devices"
       ]
-    }
-    ,
+    },
     {
-      id: 2,
+      id: 9,
       images: [
         "/assets/marble.png",
         "/assets/ecommerce-2.png",
@@ -220,7 +222,7 @@ const Portfolio = () => {
       title: "Ice Creams, Cakes, and Battery Shop",
       description:
         "A fully integrated WooCommerce website for a Saudi Arabian company offering a variety of ice creams, cakes, and batteries. Features include online ordering, product customization, and secure payment options.",
-      client: "Saudi F&B and Retail Solutions",
+      client: "Saudian F&B and Retail Solutions",
       alt: "Ice Cream, Cake, and Battery Shop E-Commerce Website Screenshots",
       projectLink: "https://www.marblestore.sa/",
       technologies: ["WooCommerce", "WordPress", "JavaScript", "Ajax", "JQuery", "MySQL", "Bootstrap", "PHP", "HTML5", "CSS3"],
@@ -232,9 +234,8 @@ const Portfolio = () => {
         "Responsive Design for Mobile & Desktop"
       ]
     },
-    
     {
-      id: 3,
+      id: 10,
       images: [
         "/assets/zad-ksa.png",
         "/assets/dashboard-2.png",
@@ -242,23 +243,23 @@ const Portfolio = () => {
         "/assets/dashboard-4.png"
       ],
       category: "Hospitality & F&B",
-  title: "Food & Beverage Concepts",
-  description:
-    "A dynamic hospitality platform designed to showcase our passion for food, offering a variety of unique food and beverage concepts. Features include easy ordering, menu browsing, and restaurant location tracking.",
-  client: "Global F&B Concepts",
-  alt: "F&B Concept Platform Screenshots",
-  projectLink: "https://zad-ksa.com/",
-  technologies: ["WordPress", "JavaScript", "Ajax", "JQuery", "MySQL", "Bootstrap", "PHP", "HTML5", "CSS3"],
-  features: [
-    "Menu Browsing & Ordering",
-    "Restaurant Location Finder",
-    "Dynamic Food & Beverage Concepts",
-    "Seamless User Experience",
-    "Responsive Design for All Devices"
-  ]
+      title: "Food & Beverage Concepts",
+      description:
+        "A dynamic hospitality platform designed to showcase our passion for food, offering a variety of unique food and beverage concepts. Features include easy ordering, menu browsing, and restaurant location tracking.",
+      client: "Global F&B Concepts",
+      alt: "F&B Concept Platform Screenshots",
+      projectLink: "https://zad-ksa.com/",
+      technologies: ["WordPress", "JavaScript", "Ajax", "JQuery", "MySQL", "Bootstrap", "PHP", "HTML5", "CSS3"],
+      features: [
+        "Menu Browsing & Ordering",
+        "Restaurant Location Finder",
+        "Dynamic Food & Beverage Concepts",
+        "Seamless User Experience",
+        "Responsive Design for All Devices"
+      ]
     },
-
     {
+      id: 11,
       images: [
         "/assets/bathleganza.png",
         "/assets/dashboard-2.png",
@@ -280,9 +281,9 @@ const Portfolio = () => {
         "Customizable Product Options",
         "User-Friendly Interface & Responsive Design"
       ]
-    }
-    ,
+    },
     {
+      id: 12,
       images: [
         "/assets/abadzone.png",
         "/assets/dashboard-2.png",
@@ -305,9 +306,9 @@ const Portfolio = () => {
         "Map Integration for Property Locations",
         "Property Comparison Tools"
       ]
-    }
-    ,
+    },
     {
+      id: 13,
       images: [
         "/assets/virrgotech.png",
         "/assets/dashboard-2.png",
@@ -330,9 +331,9 @@ const Portfolio = () => {
         "Contact Forms & Inquiry Management",
         "Project Showcase & Case Studies"
       ]
-    }
-    ,
+    },
     {
+      id: 14,
       images: [
         "/assets/lfmaudio.png",
         "/assets/dashboard-2.png",
@@ -355,9 +356,9 @@ const Portfolio = () => {
         "Responsive Design",
         "Real-Time Audio Updates"
       ]
-    }
-    ,
+    },
     {
+      id: 15,
       images: [
         "/assets/whitepinefunding.png",
         "/assets/dashboard-2.png",
@@ -381,8 +382,6 @@ const Portfolio = () => {
         "Financial Services Overview"
       ]
     }
-    ,
-    
   ];
 
   const fadeInUp = {
@@ -409,6 +408,21 @@ const Portfolio = () => {
 
   const closeItemDetails = () => {
     setSelectedItem(null);
+  };
+
+  // Pagination logic - Show exactly 4 projects per page
+  const indexOfLastProject = currentPage * projectsPerPage;
+  const indexOfFirstProject = indexOfLastProject - projectsPerPage;
+  const currentProjects = portfolioItems.slice(indexOfFirstProject, indexOfLastProject);
+  const totalPages = Math.ceil(portfolioItems.length / projectsPerPage);
+  
+  // Ensure we're showing exactly 4 projects (except on the last page if there are fewer remaining)
+  const projectsOnCurrentPage = currentProjects.length;
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    // Scroll to top when changing pages
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const nextImage = (e) => {
@@ -466,7 +480,23 @@ const Portfolio = () => {
           </motion.p>
         </motion.div>
       </header>
-<SidebarMenu/>
+
+      {/* Back to Home Button */}
+      <div className="fixed top-8 left-8 z-50">
+        <motion.a 
+          href="/"
+          className="w-14 h-14 bg-gray-800 hover:bg-yellow-500 rounded-full flex items-center justify-center transition-colors duration-300 group border border-gray-700 hover:border-yellow-500 shadow-lg"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+        >
+          <i className="fas fa-arrow-left text-xl text-gray-300 group-hover:text-white"></i>
+          <span className="absolute left-16 bg-gray-800 text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Back to Home</span>
+        </motion.a>
+      </div>
+
       {/* Portfolio Grid - Mobile Responsive */}
       <motion.div
         className="max-w-6xl mx-auto px-4"
@@ -474,9 +504,21 @@ const Portfolio = () => {
         initial="hidden"
         animate="visible"
       >
-        <div className="grid grid-cols-1 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 gap-4 md:gap-6">
+          {/* Page Info */}
+          <motion.div 
+            className="text-center mb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            <p className="text-gray-400 text-sm">
+              Showing {projectsOnCurrentPage} of {portfolioItems.length} projects (Page {currentPage} of {totalPages})
+            </p>
+          </motion.div>
+          
           <AnimatePresence>
-            {portfolioItems.map((item) => (
+            {currentProjects.map((item) => (
               <motion.div
                 key={item.id}
                 layout
@@ -489,10 +531,10 @@ const Portfolio = () => {
                   scale: 1.02,
                   transition: { duration: 0.3 }
                 }}
-                className="overflow-hidden rounded-2xl group relative bg-gray-800 shadow-2xl border border-gray-700 hover:border-yellow-500 transition-all duration-300 flex flex-col md:flex-row"
+                className="overflow-hidden rounded-xl group relative bg-gray-800 shadow-lg border border-gray-700 hover:border-yellow-500 transition-all duration-300 flex flex-col md:flex-row"
               >
                 {/* Mobile and Desktop Layout */}
-                <div className="w-full md:w-2/3 bg-gray-700 rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none overflow-hidden relative">
+                <div className="w-full md:w-2/3 bg-gray-700 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden relative">
                   {isClient && (
                     // <div className="relative w-full aspect-video">
                     //   <Image
@@ -555,38 +597,43 @@ const Portfolio = () => {
                   )}
                 </div>
                 
-                <div className="w-full md:w-1/3 p-6 flex flex-col justify-between">
+                <div className="w-full md:w-1/3 p-4 flex flex-col justify-between">
                   <div>
-                    <h4 className="font-bold text-white text-xl md:text-2xl mb-2">
+                    <h4 className="font-bold text-white text-lg md:text-xl mb-2">
                       {item.title}
                     </h4>
-                    <p className="text-yellow-500 text-base md:text-lg mb-4">
+                    <p className="text-yellow-500 text-sm md:text-base mb-3">
                       {item.category}
                     </p>
-                    <p className="text-gray-300 text-sm md:text-base mb-4">
+                    <p className="text-gray-300 text-sm mb-3">
                       {item.description}
                     </p>
                   </div>
                   <div>
-                    <div className="mb-4">
-                      <p className="text-gray-400 text-xs md:text-sm mb-2">
+                    <div className="mb-3">
+                      <p className="text-gray-400 text-xs mb-2">
                         Technologies
                       </p>
-                      <div className="flex flex-wrap gap-2">
-                        {item.technologies.slice(0,20).map((tech, index) => (
+                      <div className="flex flex-wrap gap-1.5">
+                        {item.technologies.slice(0,6).map((tech, index) => (
                           <span
                             key={index}
-                            className="bg-gray-700 text-yellow-500 px-2 py-1 rounded-full text-xs"
+                            className="bg-gray-700 text-yellow-500 px-2 py-0.5 rounded-full text-xs"
                           >
                             {tech}
                           </span>
                         ))}
+                        {item.technologies.length > 6 && (
+                          <span className="bg-gray-700 text-gray-400 px-2 py-0.5 rounded-full text-xs">
+                            +{item.technologies.length - 6}
+                          </span>
+                        )}
                       </div>
                     </div>
-                    <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+                    <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-3">
                       <Link href={item.projectLink} target="_blank">
                         <motion.button
-                          className="w-full md:w-auto px-4 py-2 bg-yellow-500 text-gray-900 font-semibold rounded-lg hover:bg-yellow-400 transition-colors duration-300 text-sm"
+                          className="w-full md:w-auto px-3 py-1.5 bg-yellow-500 text-gray-900 font-semibold rounded-lg hover:bg-yellow-400 transition-colors duration-300 text-xs"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
@@ -594,7 +641,7 @@ const Portfolio = () => {
                         </motion.button>
                       </Link>
                       <motion.button
-                        className="w-full md:w-auto px-4 py-2 border border-yellow-500 text-yellow-500 font-semibold rounded-lg hover:bg-yellow-500 hover:text-gray-900 transition-colors duration-300 text-sm"
+                        className="w-full md:w-auto px-3 py-1.5 border border-yellow-500 text-yellow-500 font-semibold rounded-lg hover:bg-yellow-500 hover:text-gray-900 transition-colors duration-300 text-xs"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => openItemDetails(item)}
@@ -608,8 +655,97 @@ const Portfolio = () => {
             ))}
           </AnimatePresence>
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <motion.div 
+            className="flex justify-center items-center mt-8 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+          >
+            <div className="flex items-center space-x-2">
+              {/* Previous Button */}
+              <motion.button
+                onClick={() => paginate(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
+                className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ${
+                  currentPage === 1
+                    ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+                    : 'bg-gray-800 text-yellow-500 hover:bg-yellow-500 hover:text-white border border-gray-700 hover:border-yellow-500'
+                }`}
+                whileHover={currentPage !== 1 ? { scale: 1.1 } : {}}
+                whileTap={currentPage !== 1 ? { scale: 0.9 } : {}}
+              >
+                <i className="fas fa-chevron-left text-sm"></i>
+              </motion.button>
+
+              {/* Page Numbers */}
+              {Array.from({ length: totalPages }, (_, index) => {
+                const pageNumber = index + 1;
+                const isActive = pageNumber === currentPage;
+                
+                // Show first page, last page, current page, and pages around current
+                const shouldShow = 
+                  pageNumber === 1 || 
+                  pageNumber === totalPages || 
+                  Math.abs(pageNumber - currentPage) <= 1;
+
+                if (!shouldShow) {
+                  // Show ellipsis
+                  if (pageNumber === 2 && currentPage > 3) {
+                    return (
+                      <span key={`ellipsis-start-${pageNumber}`} className="text-gray-400 px-2">
+                        ...
+                      </span>
+                    );
+                  }
+                  if (pageNumber === totalPages - 1 && currentPage < totalPages - 2) {
+                    return (
+                      <span key={`ellipsis-end-${pageNumber}`} className="text-gray-400 px-2">
+                        ...
+                      </span>
+                    );
+                  }
+                  return null;
+                }
+
+                return (
+                  <motion.button
+                    key={pageNumber}
+                    onClick={() => paginate(pageNumber)}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ${
+                      isActive
+                        ? 'bg-yellow-500 text-white'
+                        : 'bg-gray-800 text-yellow-500 hover:bg-yellow-500 hover:text-white border border-gray-700 hover:border-yellow-500'
+                    }`}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    {pageNumber}
+                  </motion.button>
+                );
+              })}
+
+              {/* Next Button */}
+              <motion.button
+                onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
+                disabled={currentPage === totalPages}
+                className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ${
+                  currentPage === totalPages
+                    ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+                    : 'bg-gray-800 text-yellow-500 hover:bg-yellow-500 hover:text-white border border-gray-700 hover:border-yellow-500'
+                }`}
+                whileHover={currentPage !== totalPages ? { scale: 1.1 } : {}}
+                whileTap={currentPage !== totalPages ? { scale: 0.9 } : {}}
+              >
+                <i className="fas fa-chevron-right text-sm"></i>
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
       </motion.div>
-{/* <SidebarMenu/> */}
+
       {/* Project Details Modal - Mobile Responsive */}
       <AnimatePresence>
         {selectedItem && (
