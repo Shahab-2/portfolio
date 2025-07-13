@@ -526,12 +526,8 @@ const Portfolio = () => {
                 initial="hidden"
                 animate="visible"
                 exit={{ opacity: 0, scale: 0.8 }}
-                whileHover={{
-                  y: -10,
-                  scale: 1.02,
-                  transition: { duration: 0.3 }
-                }}
-                className="overflow-hidden rounded-xl group relative bg-gray-800 shadow-lg border border-gray-700 hover:border-yellow-500 transition-all duration-300 flex flex-col md:flex-row"
+
+                className="overflow-hidden rounded-xl relative bg-gray-800 shadow-lg border border-gray-700 flex flex-col md:flex-row"
               >
                 {/* Mobile and Desktop Layout */}
                 <div className="w-full md:w-2/3 bg-gray-700 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden relative">
@@ -555,43 +551,11 @@ const Portfolio = () => {
                     width={1200} // Adjust as needed
                     height={1200} // Adjust as needed
                     objectFit="cover"
-                    className="w-full transition-transform duration-700 group-hover:scale-105"
+                    className="w-full"
                     placeholder="blur"
                     blurDataURL="/assets/ikmal.png"
                   />
-                    <div className="absolute inset-0 bg-yellow-500 bg-opacity-80 opacity-0 group-hover:opacity-70 transition-opacity duration-500 flex flex-col items-center justify-center">
-                      <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        whileHover={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
-                      >
-                        <div
-                         className="flex space-x-4 mb-4">
-                          <motion.button 
-                            className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => openItemDetails(item)}
-                          >
-                            <i className="fas fa-search text-yellow-500 text-lg"></i>
-                          </motion.button>
-                          <Link href={item.projectLink} target="_blank">
-                            <motion.div 
-                              className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg"
-                              whileHover={{ scale: 1.1 }}
-                              whileTap={{ scale: 0.9 }}
-                            >
-                              <i className="fas fa-link text-yellow-500 text-lg"></i>
-                            </motion.div>
-                          </Link>
-                        </div>
-                        <h4 
-                        className="text-white font-bold text-xl text-center">
-                          {item.title}
-                        </h4>
-                      </motion.div>
-                    </div>
+
                   </div>
 
                   )}
@@ -746,142 +710,137 @@ const Portfolio = () => {
         )}
       </motion.div>
 
-      {/* Project Details Modal - Mobile Responsive */}
+      {/* Simple Project Details Modal */}
       <AnimatePresence>
         {selectedItem && (
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4 overflow-y-auto"
+            className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeItemDetails}
           >
             <motion.div
-              className="bg-gray-800 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative"
+              className="bg-gray-800 rounded-xl w-full max-w-2xl max-h-[80vh] overflow-y-auto"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: "spring", bounce: 0.2 }}
+              transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <button
-                className="absolute top-4 right-4 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-yellow-500 transition-colors duration-300 z-10"
-                onClick={closeItemDetails}
-              >
-                <i className="fas fa-times text-white text-sm md:text-base"></i>
-              </button>
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 border-b border-gray-700">
+                <h3 className="text-lg font-semibold text-white">{selectedItem.title}</h3>
+                <button
+                  className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-yellow-500 transition-colors"
+                  onClick={closeItemDetails}
+                >
+                  <i className="fas fa-times text-white text-sm"></i>
+                </button>
+              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 relative">
-                {/* Image Carousel */}
-                <div className="relative h-64 md:h-[500px] overflow-hidden">
+              {/* Content */}
+              <div className="p-4 space-y-4">
+                {/* Image */}
+                <div className="relative aspect-[16/9] rounded-lg overflow-hidden">
                   <Image
                     src={selectedItem.images[currentImageIndex]}
-                    alt={`${selectedItem.alt} - Image ${currentImageIndex + 1}`}
-                    layout="fill"
-                    objectFit="cover"
-                    className="transition-opacity duration-500"
+                    alt={selectedItem.alt}
+                    fill
+                    className="object-cover"
                   />
                   {selectedItem.images.length > 1 && (
                     <>
                       <button
                         onClick={prevImage}
-                        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-1 md:p-2 rounded-full hover:bg-yellow-500 transition-colors"
+                        className="absolute left-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-yellow-500"
                       >
-                        <i className="fas fa-chevron-left text-sm md:text-base"></i>
+                        <i className="fas fa-chevron-left text-xs"></i>
                       </button>
                       <button
                         onClick={nextImage}
-                        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-1 md:p-2 rounded-full hover:bg-yellow-500 transition-colors"
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-yellow-500"
                       >
-                        <i className="fas fa-chevron-right text-sm md:text-base"></i>
+                        <i className="fas fa-chevron-right text-xs"></i>
                       </button>
                     </>
                   )}
-                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                    {selectedItem.images.map((_, index) => (
-                      <span
-                        key={index}
-                        className={`w-2 h-2 rounded-full ${
-                          index === currentImageIndex 
-                            ? 'bg-yellow-500' 
-                            : 'bg-gray-400'
-                        }`}
-                      ></span>
-                    ))}
+                </div>
+
+                {/* Description */}
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  {selectedItem.description}
+                </p>
+
+                {/* Info Grid */}
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <p className="text-gray-400 text-xs uppercase">Category</p>
+                    <p className="text-white font-medium">{selectedItem.category}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-xs uppercase">Client</p>
+                    <p className="text-white font-medium">{selectedItem.client}</p>
                   </div>
                 </div>
 
-                <div className="p-6 md:p-8 overflow-y-auto max-h-[500px]">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 md:mb-6">
-                    {selectedItem.title}
-                  </h3>
-                  <p className="text-gray-300 text-sm md:text-lg mb-4 md:mb-8">
-                    {selectedItem.description}
-                  </p>
-
-                  <div className="border-t border-gray-700 pt-4 md:pt-6 mt-4 md:mt-6">
-                    <div className="grid grid-cols-2 gap-4 md:gap-8 mb-4 md:mb-8">
-                      <div>
-                        <p className="text-gray-400 text-xs md:text-sm">Category</p>
-                        <p className="text-white font-medium text-sm md:text-lg">
-                          {selectedItem.category}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-gray-400 text-xs md:text-sm">Client</p>
-                        <p className="text-white font-medium text-sm md:text-lg">
-                          {selectedItem.client}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Technologies Used */}
-                    <div className="mb-4 md:mb-8">
-                      <p className="text-gray-400 text-xs md:text-sm mb-2">Technologies</p>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedItem.technologies.map((tech, index) => (
-                          <span
-                            key={index}
-                            className="bg-gray-700 text-yellow-500 px-2 md:px-4 py-1 rounded-full text-xs md:text-sm"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Key Features */}
-                    <div className="mb-4 md:mb-8">
-                      <p className="text-gray-400 text-xs md:text-sm mb-2">Key Features</p>
-                      <ul className="list-disc list-inside text-white space-y-1 md:space-y-2 text-xs md:text-base">
-                        {selectedItem.features.map((feature, index) => (
-                          <li key={index} className="text-gray-300">
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 md:mt-8 flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
-                    <Link href={selectedItem.projectLink} target="_blank">
-                      <motion.button
-                        className="w-full px-4 py-2 md:px-8 md:py-4 bg-yellow-500 text-gray-900 font-semibold rounded-lg hover:bg-yellow-400 transition-colors duration-300 text-sm md:text-lg"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                {/* Technologies */}
+                <div>
+                  <p className="text-gray-400 text-xs uppercase mb-2">Technologies</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {selectedItem.technologies.slice(0, 8).map((tech, index) => (
+                      <span
+                        key={index}
+                        className="bg-gray-700 text-yellow-500 px-2 py-1 rounded text-xs"
                       >
-                        View Live Project
-                      </motion.button>
-                    </Link>
-                    <motion.button
-                      className="w-full px-4 py-2 md:px-8 md:py-4 border border-yellow-500 text-yellow-500 font-semibold rounded-lg hover:bg-yellow-500 hover:text-gray-900 transition-colors duration-300 text-sm md:text-lg"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={closeItemDetails}
-                    >
-                      Close
-                    </motion.button>
+                        {tech}
+                      </span>
+                    ))}
+                    {selectedItem.technologies.length > 8 && (
+                      <span className="bg-gray-700 text-gray-400 px-2 py-1 rounded text-xs">
+                        +{selectedItem.technologies.length - 8}
+                      </span>
+                    )}
                   </div>
+                </div>
+
+                {/* Features */}
+                <div>
+                  <p className="text-gray-400 text-xs uppercase mb-2">Key Features</p>
+                  <ul className="space-y-1 text-sm">
+                    {selectedItem.features.slice(0, 4).map((feature, index) => (
+                      <li key={index} className="text-gray-300 flex items-start">
+                        <i className="fas fa-check text-yellow-500 text-xs mt-1 mr-2 flex-shrink-0"></i>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                    {selectedItem.features.length > 4 && (
+                      <li className="text-gray-400 text-xs">
+                        +{selectedItem.features.length - 4} more features
+                      </li>
+                    )}
+                  </ul>
+                </div>
+
+                {/* Actions */}
+                <div className="flex gap-3 pt-2">
+                  <Link href={selectedItem.projectLink} target="_blank" className="flex-1">
+                    <motion.button
+                      className="w-full px-4 py-2 bg-yellow-500 text-gray-900 font-semibold rounded-lg hover:bg-yellow-400 transition-colors text-sm"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      View Project
+                    </motion.button>
+                  </Link>
+                  <motion.button
+                    className="px-4 py-2 border border-yellow-500 text-yellow-500 font-semibold rounded-lg hover:bg-yellow-500 hover:text-gray-900 transition-colors text-sm"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={closeItemDetails}
+                  >
+                    Close
+                  </motion.button>
                 </div>
               </div>
             </motion.div>
