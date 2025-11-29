@@ -532,32 +532,19 @@ const Portfolio = () => {
                 {/* Mobile and Desktop Layout */}
                 <div className="w-full md:w-2/3 bg-gray-700 rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden relative">
                   {isClient && (
-                    // <div className="relative w-full aspect-video">
-                    //   <Image
-                    //     src={item.images[0]}
-                    //     alt={item.alt}
-                    //     layout="fill"
-                    //     objectFit="cover"
-                    //     className="transition-transform duration-700 group-hover:scale-105"
-                    //     placeholder="blur"
-                    //     blurDataURL={item.images[0]}
-                    //   />
-                    //   {/* Hover Overlay - Same as before */}
-                    // </div>
                     <div className="relative w-full h-100">
-                  <Image 
-                    src={item.images[0]} 
-                    alt={item.alt}
-                    width={1200} // Adjust as needed
-                    height={1200} // Adjust as needed
-                    objectFit="cover"
-                    className="w-full"
-                    placeholder="blur"
-                    blurDataURL="/assets/ikmal.png"
-                  />
-
-                  </div>
-
+                      <Image 
+                        src={item.images[0]} 
+                        alt={item.alt}
+                        width={800}
+                        height={600}
+                        className="w-full h-full object-cover"
+                        loading={item.id <= 4 ? "eager" : "lazy"}
+                        quality={80}
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwABmQAAA/9k="
+                      />
+                    </div>
                   )}
                 </div>
                 
@@ -748,6 +735,8 @@ const Portfolio = () => {
                     alt={selectedItem.alt}
                     fill
                     className="object-cover"
+                    quality={85}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   {selectedItem.images.length > 1 && (
                     <>

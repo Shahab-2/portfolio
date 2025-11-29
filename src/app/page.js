@@ -13,70 +13,32 @@ export default function Home() {
   const [downloadAnimation, setDownloadAnimation] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Import fonts in useEffect to ensure they're loaded
+  // Set loaded state
   useEffect(() => {
-    // Add font-display: swap to improve text rendering during font loading
-    const fontStylesElement = document.createElement('style');
-    fontStylesElement.textContent = `
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
-      
-      body {
-        font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      
-      h1, h2, h3, h4, h5, h6 {
-        font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      }
-    `;
-    document.head.appendChild(fontStylesElement);
-
-    // Set loaded state after fonts are loaded
-    const timer = setTimeout(() => setIsLoaded(true), 500);
-
-    return () => {
-      document.head.removeChild(fontStylesElement);
-      clearTimeout(timer);
-    };
+    setIsLoaded(true);
   }, []);
 
   // Refs for parallax elements
   const containerRef = useRef(null);
   const imageRef = useRef(null);
 
-  // For parallax scrolling
+  // Optimized parallax scrolling - Simplified for better performance
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
 
-  // For smooth scroll progress
-  const smoothScrollProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+  // Transform values for parallax elements - Reduced transforms
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, -50]); // Reduced movement
+  const opacitySection = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.9, 0.8]); // Simplified
 
-  // Transform values for parallax elements
-  const imageY = useTransform(smoothScrollProgress, [0, 1], [0, -100]);
-  const opacitySection = useTransform(smoothScrollProgress, [0, 0.2, 0.8, 1], [1, 1, 0.8, 0]);
-  const scale = useTransform(smoothScrollProgress, [0, 0.5], [1, 0.9]);
-
-  // Smooth cursor following
+  // Smooth cursor following - Optimized spring config
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 700 };
+  const springConfig = { damping: 30, stiffness: 400 }; // Reduced for better performance
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
-
-  // Added rotation for 3D effect
-  const rotateX = useMotionValue(0);
-  const rotateY = useMotionValue(0);
-  const rotateXSpring = useSpring(rotateX, { stiffness: 500, damping: 50 });
-  const rotateYSpring = useSpring(rotateY, { stiffness: 500, damping: 50 });
 
 
 
@@ -87,32 +49,31 @@ export default function Home() {
 
     const handleMouseMove = (e) => {
       const { clientX, clientY } = e;
-      setMousePosition({ x: clientX, y: clientY });
-      cursorX.set(clientX - 16); // Adjust cursor position
+      cursorX.set(clientX - 16);
       cursorY.set(clientY - 16);
+    };
 
-      // Update rotation based on mouse position for 3D effect
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const rotX = (clientY - centerY) / 30;
-        const rotY = (clientX - centerX) / 30;
-
-        rotateX.set(rotX);
-        rotateY.set(-rotY);
-      }
+    // Debounce resize handler for better performance
+    let resizeTimer;
+    const debouncedResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(checkMobile, 150);
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', debouncedResize);
+    
+    // Only add mousemove on desktop for performance
+    if (window.innerWidth >= 1024) {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
 
     return () => {
-      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('resize', debouncedResize);
       window.removeEventListener('mousemove', handleMouseMove);
+      clearTimeout(resizeTimer);
     };
-  }, [cursorX, cursorY, rotateX, rotateY]);
+  }, [cursorX, cursorY]);
 
   // Cursor animations
   const variants = {
@@ -168,13 +129,12 @@ export default function Home() {
     setDownloadAnimation(false);
   };
 
-  // Simplified animation variants
+  // Optimized animation variants - Reduced complexity
   const buttonVariants = {
-    initial: { scale: 1, opacity: 0.9 },
+    initial: { scale: 1 },
     hover: {
       scale: 1.02,
-      opacity: 1,
-      transition: { duration: 0.2 }
+      transition: { duration: 0.15, ease: "easeOut" }
     },
     tap: {
       scale: 0.98,
@@ -184,11 +144,10 @@ export default function Home() {
 
   // Download button animation
   const downloadButtonVariants = {
-    initial: { scale: 1, opacity: 0.9 },
+    initial: { scale: 1 },
     hover: {
       scale: 1.03,
-      opacity: 1,
-      transition: { duration: 0.2 }
+      transition: { duration: 0.15, ease: "easeOut" }
     },
     tap: {
       scale: 0.97,
@@ -197,24 +156,24 @@ export default function Home() {
   };
 
   const contentVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.4,
         ease: "easeOut",
-        staggerChildren: 0.1
+        staggerChildren: 0.08
       }
     }
   };
 
   const childVariants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 10 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: "easeOut" }
+      transition: { duration: 0.3, ease: "easeOut" }
     }
   };
 
@@ -347,9 +306,9 @@ export default function Home() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: isLoaded ? 1 : 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.3 }}
       className={`${textPrimary} font-sans
-        min-h-screen transition-colors duration-700 overflow-hidden bg-gradient-to-br ${gradientColors}`}
+        min-h-screen transition-colors duration-300 overflow-hidden bg-gradient-to-br ${gradientColors}`}
       style={{
         background: darkMode 
           ? 'linear-gradient(135deg, #111827 0%, #1f2937 50%, #000000 100%)'
@@ -486,7 +445,7 @@ export default function Home() {
       <motion.main
         initial="hidden"
         animate="visible"
-        style={{ opacity: opacitySection, scale }}
+        style={{ opacity: opacitySection }}
         className="container mx-auto px-4 lg:px-8 max-w-6xl"
       >
         <AnimatePresence mode="wait">
@@ -516,6 +475,8 @@ export default function Home() {
                   fill
                   priority
                   className="object-cover"
+                  quality={90}
+                  sizes="256px"
                 />
 
               </motion.div>
@@ -670,6 +631,8 @@ export default function Home() {
                     fill
                     priority
                     className="object-cover"
+                    quality={90}
+                    sizes="(max-width: 1024px) 256px, 320px"
                   />
 
 
@@ -951,6 +914,9 @@ export default function Home() {
                     alt={project.title}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    quality={80}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading={index < 3 ? "eager" : "lazy"}
                   />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <motion.a
