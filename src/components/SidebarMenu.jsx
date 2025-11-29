@@ -1,82 +1,93 @@
 'use client';
 import React, { useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-  useMotionValue,
-  useSpring,
-} from "framer-motion";
-import Link from "next/link"; // Changed to Next.js Link
-import { LucideLink } from "lucide-react"; // If you need the Lucide Link icon specifically
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const SidebarMenu = () => {
-  const [darkMode, setDarkMode] = useState(true);
-  const [cursorVariant, setCursorVariant] = useState("default"); // Added missing state
-  const [downloadAnimation, setDownloadAnimation] = useState(false); // Added missing state
+  const pathname = usePathname();
+  const [hoveredItem, setHoveredItem] = useState(null);
   
-  const leaveHover = () => {
-    setCursorVariant("default");
-    setDownloadAnimation(false);
-  };
-
-  const enterButton = () => setCursorVariant("button");
-  
-  // Enhanced animation variants
+  // Modern animation variants
   const buttonVariants = {
-    initial: { scale: 1, opacity: 0.8 },
+    initial: { scale: 1 },
     hover: {
-      scale: 1.05,
-      opacity: 1,
-      boxShadow: "0 10px 25px -5px rgba(245, 158, 11, 0.3)",
+      scale: 1.1,
       transition: {
         type: "spring",
         stiffness: 400,
         damping: 10,
-        duration: 0.3,
       },
     },
     tap: {
       scale: 0.95,
-      transition: { duration: 0.2 },
+      transition: { duration: 0.1 },
     },
   };
   
-
   
-  // Enhanced Navigation Button with hover animation
-  const NavButton = ({ href, icon, className = "", activeClassName = "" }) => (
-    <motion.div
-      variants={buttonVariants}
-      initial="initial"
-      whileHover="hover"
-      whileTap="tap"
-      onMouseEnter={enterButton}
-      onMouseLeave={leaveHover}
-    >
-      <Link
-        href={href}
-        className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 backdrop-blur-sm group ${className} ${activeClassName}`}
+  // Modern Navigation Button with glassmorphism
+  const NavButton = ({ href, icon, label, gradient }) => {
+    const isActive = pathname === href;
+    
+    return (
+      <motion.div
+        variants={buttonVariants}
+        initial="initial"
+        whileHover="hover"
+        whileTap="tap"
+        className="relative group"
+        onMouseEnter={() => setHoveredItem(label)}
+        onMouseLeave={() => setHoveredItem(null)}
       >
+        <Link href={href}>
+          <motion.div
+            className={`relative w-14 h-14 rounded-2xl flex items-center justify-center backdrop-blur-xl border transition-all duration-300 ${
+              isActive 
+                ? `bg-gradient-to-br ${gradient} border-transparent shadow-lg shadow-${gradient.split('-')[1]}-500/50` 
+                : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
+            }`}
+          >
+            {/* Active indicator */}
+            {isActive && (
+              <motion.div
+                className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-yellow-400 to-orange-500 rounded-full"
+                layoutId="activeIndicator"
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            )}
+            
+            {/* Icon */}
+            <motion.div
+              className={isActive ? 'text-white' : 'text-gray-400 group-hover:text-white'}
+              whileHover={{ rotate: [0, -10, 10, 0] }}
+              transition={{ duration: 0.3 }}
+            >
+              {icon}
+            </motion.div>
+
+            {/* Glow effect on hover */}
+            <motion.div
+              className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300`}
+            />
+          </motion.div>
+        </Link>
+
+        {/* Tooltip */}
         <motion.div
-          initial={{ scale: 0.8 }}
-          animate={{ scale: 1 }}
-          transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 15,
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ 
+            opacity: hoveredItem === label ? 1 : 0,
+            x: hoveredItem === label ? 0 : -10
           }}
-          whileHover={{
-            rotate: [0, -10, 10, -10, 0],
-            transition: { duration: 0.5 },
-          }}
+          className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-xl text-white text-sm font-medium whitespace-nowrap pointer-events-none shadow-2xl"
         >
-          {icon}
+          {label}
+          <div className="absolute left-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-b-4 border-b-transparent border-l-4 border-l-gray-900/95"></div>
         </motion.div>
-      </Link>
-    </motion.div>
-  );
+      </motion.div>
+    );
+  };
   
   // Updated navigation icons with more modern design
   const NavIcons = {
@@ -173,79 +184,88 @@ export const SidebarMenu = () => {
     ),
   };
   
+  const menuItems = [
+    { href: "/", icon: NavIcons.home, label: "Home", gradient: "from-blue-500 to-cyan-500" },
+    { href: "/about", icon: NavIcons.about, label: "About", gradient: "from-purple-500 to-pink-500" },
+    { href: "/portfolio", icon: NavIcons.portfolio, label: "Portfolio", gradient: "from-orange-500 to-red-500" },
+    { href: "/contact", icon: NavIcons.contact, label: "Contact", gradient: "from-green-500 to-emerald-500" },
+  ];
+
   return (
     <>
-      <div className="hidden lg:flex fixed right-10 top-1/2 transform -translate-y-1/2 flex-col gap-6 z-20">
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{
-            duration: 0.5,
-            delay: 0.2,
-            staggerChildren: 0.1,
-            delayChildren: 0.3,
-          }}
-          className="space-y-6"
-        >
-          <NavButton
-            href="/"
-            icon={NavIcons.home}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
-          <NavButton
-            href="/about"
-            icon={NavIcons.about}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
-          <NavButton
-            href="/portfolio"
-            icon={NavIcons.portfolio}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
-          <NavButton
-            href="/contact"
-            icon={NavIcons.contact}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
-        </motion.div>
-      </div>
+      {/* Desktop Sidebar - Modern Glassmorphism */}
+      <motion.div 
+        className="hidden lg:flex fixed right-8 top-1/2 -translate-y-1/2 z-50"
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        {/* Glassmorphic Container */}
+        <div className="relative backdrop-blur-2xl bg-white/5 border border-white/10 rounded-3xl p-4 shadow-2xl">
+          {/* Decorative Glow */}
+          <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/10 via-transparent to-purple-500/10 rounded-3xl blur-xl opacity-50"></div>
+          
+          {/* Navigation Items */}
+          <div className="relative space-y-4">
+            {menuItems.map((item, index) => (
+              <motion.div
+                key={item.href}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 + index * 0.1 }}
+              >
+                <NavButton {...item} />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Decorative Dots */}
+          <div className="absolute -left-2 top-1/2 -translate-y-1/2 flex flex-col gap-2">
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-1 h-1 rounded-full bg-yellow-500/50"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.3, 0.8, 0.3],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </motion.div>
       
-      {/* Enhanced Mobile Bottom Navigation with bounce animation */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-gray-900/80 backdrop-blur-lg z-20 py-4">
-        <motion.div
-          initial={{ y: 100 }}
-          animate={{ y: 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="flex justify-around max-w-xl mx-auto"
-        >
-          <NavButton
-            href="/"
-            icon={NavIcons.home}
-            className="bg-gray-800/70 text-white"
-            activeClassName="bg-yellow-500 text-black"
-          />
-          <NavButton
-            href="/about"
-            icon={NavIcons.about}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
-          <NavButton
-            href="/portfolio"
-            icon={NavIcons.portfolio}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
-          <NavButton
-            href="/contact"
-            icon={NavIcons.contact}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
-          <NavButton
-            href="/chat"
-            icon={NavIcons.chat}
-            className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          />
-        </motion.div>
-      </div>
+      {/* Mobile Bottom Navigation - Modern Glassmorphism */}
+      <motion.div 
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-50"
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
+        {/* Glassmorphic Container */}
+        <div className="relative backdrop-blur-2xl bg-gray-900/80 border-t border-white/10">
+          {/* Decorative Top Glow */}
+          <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent"></div>
+          
+          <div className="flex justify-around items-center max-w-xl mx-auto px-4 py-4">
+            {menuItems.map((item, index) => (
+              <motion.div
+                key={item.href}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <NavButton {...item} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
     </>
   );
 };

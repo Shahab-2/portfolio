@@ -443,59 +443,112 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white relative pb-16">
-      {/* Header Section (Previous implementation remains the same) */}
-      <header className="relative text-center py-12 md:py-20 px-4 overflow-hidden">
+      {/* Modern Header */}
+      <header className="relative text-center py-24 md:py-32 px-4 overflow-hidden">
+        {/* Animated Background Text */}
+        <div className="absolute inset-0 flex justify-center items-center opacity-5">
+          <motion.h1 
+            className="text-7xl md:text-9xl lg:text-[20rem] font-black text-white tracking-widest"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 0.05, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.3 }}
+          >
+            WORK
+          </motion.h1>
+        </div>
+
+        {/* Animated Orbs */}
         <motion.div
+          className="absolute top-20 left-20 w-64 md:w-72 h-64 md:h-72 rounded-full opacity-10 blur-3xl"
+          style={{ background: 'linear-gradient(135deg, #f59e0b, #ef4444)' }}
+          animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        />
+        
+        <motion.div 
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="relative z-10"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-4 md:mb-6">
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-white"
-            >
-              MY
-            </motion.span>{" "}
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="text-yellow-500"
-            >
-              PROJECTS
-            </motion.span>
-          </h2>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-            className="max-w-2xl mx-auto text-gray-300 mt-2 md:mt-4 text-base md:text-lg px-4"
+          {/* Badge */}
+          <motion.div
+            className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-orange-500/20 to-red-500/20 border border-orange-500/30 rounded-full text-orange-400 text-xs md:text-sm font-medium backdrop-blur-sm mb-6 md:mb-8"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.5, type: "spring" }}
+            whileHover={{ scale: 1.05 }}
           >
-            Innovative solutions and creative web experiences
-          </motion.p>
+            <span className="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></span>
+            All Projects
+          </motion.div>
+
+          <motion.div 
+            className="inline-block"
+            whileHover={{ scale: 1.03 }}
+          >
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black mb-4 md:mb-6">
+              <span className="text-white">MY </span>
+              <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 text-transparent bg-clip-text animate-gradient">
+                PORTFOLIO
+              </span>
+            </h2>
+          </motion.div>
+
+          <div className="flex flex-col md:flex-row items-center justify-center gap-3 mb-4 md:mb-6">
+            <motion.div
+              className="hidden md:block h-1 w-12 md:w-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: 80 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            />
+            <motion.p 
+              className="max-w-2xl mx-auto text-gray-300 text-base md:text-xl px-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
+              Innovative solutions and creative web experiences
+            </motion.p>
+            <motion.div
+              className="hidden md:block h-1 w-12 md:w-20 bg-gradient-to-r from-red-500 to-pink-500 rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: 80 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            />
+          </div>
         </motion.div>
       </header>
 
-      {/* Back to Home Button */}
-      <div className="fixed top-8 left-8 z-50">
+      {/* Modern Back Button */}
+      <motion.div 
+        className="fixed top-8 left-8 z-50"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
+      >
         <motion.a 
           href="/"
-          className="w-14 h-14 bg-gray-800 hover:bg-yellow-500 rounded-full flex items-center justify-center transition-colors duration-300 group border border-gray-700 hover:border-yellow-500 shadow-lg"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
+          className="group relative w-14 h-14 backdrop-blur-xl bg-white/5 border border-white/10 hover:bg-white/10 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-2xl"
+          whileHover={{ scale: 1.1, x: -5 }}
+          whileTap={{ scale: 0.95 }}
         >
-          <i className="fas fa-arrow-left text-xl text-gray-300 group-hover:text-white"></i>
-          <span className="absolute left-16 bg-gray-800 text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Back to Home</span>
+          <i className="fas fa-arrow-left text-xl text-gray-300 group-hover:text-yellow-400 transition-colors"></i>
+          
+          {/* Tooltip */}
+          <motion.span 
+            className="absolute left-full ml-4 bg-gray-900/95 backdrop-blur-xl border border-white/10 text-white px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-2xl"
+            initial={{ x: -10 }}
+            whileHover={{ x: 0 }}
+          >
+            Back to Home
+            <div className="absolute right-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-b-4 border-b-transparent border-r-4 border-r-gray-900/95"></div>
+          </motion.span>
+
+          {/* Glow on hover */}
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-500 to-orange-500 opacity-0 group-hover:opacity-20 blur-xl transition-opacity"></div>
         </motion.a>
-      </div>
+      </motion.div>
 
       {/* Portfolio Grid - Mobile Responsive */}
       <motion.div
