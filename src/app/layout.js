@@ -35,6 +35,12 @@ export const metadata = {
   description: "Portfolio of Shahab Gul, Full Stack Developer & UI/UX Designer specializing in modern web applications and user experience design",
   keywords: "Full Stack Developer, UI/UX Designer, React, Next.js, Node.js, JavaScript, Portfolio, Web Development",
   authors: [{ name: "Shahab Gul" }],
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
   openGraph: {
     title: "Shahab Gul - Full Stack Developer",
     description: "Full Stack Developer & UI/UX Designer Portfolio",
