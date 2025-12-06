@@ -20,12 +20,9 @@ export default function Home() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
-  const [isHoveringImage, setIsHoveringImage] = useState(false);
 
   // Refs
   const containerRef = useRef(null);
-  const videoRef = useRef(null);
-  const mobileVideoRef = useRef(null);
 
   // Scroll progress
   const { scrollYProgress } = useScroll({
@@ -156,32 +153,7 @@ export default function Home() {
     setTimeout(() => setDownloadAnimation(false), 2000);
   };
 
-  // Handle video play/pause on hover
-  const handleImageHoverEnter = () => {
-    setIsHoveringImage(true);
-    // Play video after a short delay to allow transition
-    setTimeout(() => {
-      if (videoRef.current) {
-        videoRef.current.play().catch(err => console.log('Video play error:', err));
-      }
-      if (mobileVideoRef.current) {
-        mobileVideoRef.current.play().catch(err => console.log('Video play error:', err));
-      }
-    }, 100);
-  };
-
-  const handleImageHoverLeave = () => {
-    setIsHoveringImage(false);
-    // Pause and reset video
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-    if (mobileVideoRef.current) {
-      mobileVideoRef.current.pause();
-      mobileVideoRef.current.currentTime = 0;
-    }
-  };
+  // Video play/pause functionality removed - always show static image
 
   // Contact form handler
   const handleFormChange = (e) => {
@@ -463,49 +435,41 @@ export default function Home() {
               key="mobile-content"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex flex-col items-center justify-center text-center space-y-6 sm:space-y-8 py-16 pb-32 w-full"
+              className="flex flex-col items-center justify-center text-center space-y-8 py-20 pb-36 w-full relative overflow-hidden"
             >
+              {/* Mobile Background Decorations */}
               <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden shadow-lg border-2 border-white bg-white cursor-pointer"
+                className="absolute top-10 right-10 w-32 h-32 rounded-full opacity-10 blur-2xl"
+                style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}
+                animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              />
+              <motion.div
+                className="absolute bottom-20 left-10 w-24 h-24 rounded-full opacity-10 blur-2xl"
+                style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}
+                animate={{ scale: [1, 1.3, 1], rotate: [360, 180, 0] }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              />
+
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0, rotate: -10 }}
+                animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
+                className="relative cursor-pointer group"
                 whileHover={{ scale: 1.05 }}
-                onMouseEnter={handleImageHoverEnter}
-                onMouseLeave={handleImageHoverLeave}
-                onTouchStart={handleImageHoverEnter}
               >
-                <AnimatePresence mode="wait">
-                  {isHoveringImage ? (
-                    <motion.div
-                      key="video"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="relative w-full h-full"
-                    >
-                      <video
-                        ref={mobileVideoRef}
-                        className="w-full h-full object-cover"
-                        loop
-                        muted
-                        playsInline
-                        preload="auto"
-                        style={{ willChange: 'transform' }}
-                      >
-                        <source src="/portfolio.mp4" type="video/mp4" />
-                      </video>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="profile"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="relative w-full h-full"
-                    >
+                {/* Gradient Border Ring */}
+                <div className="relative p-1 rounded-full"
+                  style={{
+                    background: 'linear-gradient(135deg, #fbbf24, #f59e0b, #ec4899, #8b5cf6)',
+                    backgroundSize: '400% 400%',
+                    animation: 'gradient 15s ease infinite'
+                  }}
+                >
+                  <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden shadow-2xl bg-gray-900">
+                    {/* Inner glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-transparent rounded-full"></div>
+                    <div className="relative w-full h-full">
                       <Image
                         src="/shahabprofile.png"
                         alt="Shahab Gul"
@@ -515,59 +479,92 @@ export default function Home() {
                         quality={90}
                         sizes="(max-width: 640px) 192px, (max-width: 768px) 224px, 256px"
                       />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
 
-              <div className="space-y-3 sm:space-y-4 px-4">
-                <motion.h1
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="text-2xl sm:text-3xl md:text-4xl font-bold"
-                >
-                  <span className="text-yellow-500 font-extrabold">Shahab</span> <span className="tracking-wide">Gul</span>
-                </motion.h1>
+              {/* Content Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="space-y-6 px-6 relative z-10"
+              >
+                <div className="space-y-4">
+                  <motion.h1
+                    className="text-3xl sm:text-4xl font-black leading-tight"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 text-transparent bg-clip-text animate-gradient">
+                      Shahab Gul
+                    </span>
+                  </motion.h1>
+
+                  <motion.div
+                    className="flex items-center justify-center gap-2"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.6, type: "spring" }}
+                  >
+                    <div className="h-px w-8 bg-gradient-to-r from-transparent to-yellow-500"></div>
+                    <h2 className="text-sm sm:text-base font-bold tracking-wider text-gray-200 uppercase">
+                      Full Stack Web Developer
+                    </h2>
+                    <div className="h-px w-8 bg-gradient-to-r from-yellow-500 to-transparent"></div>
+                  </motion.div>
+                </div>
 
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="flex items-center justify-center"
+                  transition={{ delay: 0.7 }}
+                  className="max-w-sm mx-auto"
                 >
-                  <h2 className="text-xs sm:text-sm md:text-base font-semibold tracking-wide text-gray-200">Full Stack Web Developer</h2>
+                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed font-medium">
+                    Passionate full-stack developer crafting
+                    <span className="text-yellow-400 font-semibold"> innovative digital solutions</span> that
+                    combine functionality with stunning design.
+                  </p>
                 </motion.div>
+              </motion.div>
 
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                  className="text-gray-300 max-w-md mx-auto text-xs sm:text-sm leading-relaxed font-medium"
-                >
-                  A passionate full-stack developer and UI/UX designer crafting
-                  innovative digital solutions that combine functionality with stunning design.
-                </motion.p>
-              </div>
-
+              {/* Enhanced Download Button */}
               <motion.button
                 onClick={handleDownloadCV}
                 variants={buttonVariants}
                 initial="initial"
                 whileHover="hover"
                 whileTap="tap"
-                className="inline-flex items-center px-5 sm:px-6 py-2.5 sm:py-3 text-black font-medium shadow-lg rounded-full transition duration-300 text-xs sm:text-sm"
+                className="relative inline-flex items-center px-8 py-4 text-black font-bold shadow-2xl rounded-2xl overflow-hidden group text-sm sm:text-base"
                 style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' }}
               >
-                <span className="mr-2">{NavIcons.download}</span>
-                Download CV
+                {/* Shine effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: '100%' }}
+                  transition={{ duration: 0.6 }}
+                />
+                <span className="relative z-10 flex items-center gap-3">
+                  <motion.div
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {NavIcons.download}
+                  </motion.div>
+                  Download CV
+                </span>
               </motion.button>
 
+              {/* Enhanced Social Links */}
               <motion.div
-                className="flex space-x-4 sm:space-x-5 mt-4 sm:mt-6"
-                initial={{ opacity: 0, y: 20 }}
+                className="flex justify-center space-x-6 mt-8"
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
+                transition={{ delay: 0.9, duration: 0.6 }}
               >
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -575,14 +572,31 @@ export default function Home() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-gray-300 transition-all duration-300"
-                    whileHover={{ scale: 1.05 }}
+                    className="relative w-12 h-12 rounded-xl flex items-center justify-center text-gray-300 transition-all duration-300 group overflow-hidden"
+                    whileHover={{ scale: 1.1, y: -3 }}
                     whileTap={{ scale: 0.95 }}
-                    style={{ background: 'linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.8) 100%)' }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1, transition: { delay: 0.9 + (index * 0.1) } }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1, transition: { delay: 1.0 + (index * 0.1) } }}
                   >
-                    <i className={`fab fa-${social.name} text-sm sm:text-base`} />
+                    {/* Background with gradient */}
+                    <div className="absolute inset-0 rounded-xl opacity-80 group-hover:opacity-100 transition-opacity"
+                      style={{
+                        background: social.name === 'github'
+                          ? 'linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(17, 24, 39, 0.9) 100%)'
+                          : social.name === 'linkedin'
+                          ? 'linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(37, 99, 235, 0.8) 100%)'
+                          : 'linear-gradient(135deg, rgba(139, 92, 246, 0.8) 0%, rgba(168, 85, 247, 0.8) 100%)'
+                      }}
+                    />
+
+                    {/* Hover glow effect */}
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-yellow-500/20 to-orange-500/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity"></div>
+
+                    <motion.i
+                      className={`fab fa-${social.name} text-base relative z-10`}
+                      whileHover={{ rotate: [0, -10, 10, 0] }}
+                      transition={{ duration: 0.5 }}
+                    />
                   </motion.a>
                 ))}
               </motion.div>
@@ -633,8 +647,6 @@ export default function Home() {
                       transition={{ duration: 0.6, delay: 0.4 }}
                       className="relative w-80 h-80 rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
                       whileHover={{ scale: 1.05 }}
-                      onMouseEnter={handleImageHoverEnter}
-                      onMouseLeave={handleImageHoverLeave}
                     >
                       <div className="absolute inset-0 rounded-2xl p-[3px]"
                         style={{
@@ -644,49 +656,15 @@ export default function Home() {
                         }}
                       >
                         <div className="w-full h-full bg-gray-900 rounded-2xl overflow-hidden">
-                          <AnimatePresence mode="wait">
-                            {isHoveringImage ? (
-                              <motion.div
-                                key="video"
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.95 }}
-                                transition={{ duration: 0.2 }}
-                                className="relative w-full h-full"
-                              >
-                                <video
-                                  ref={videoRef}
-                                  className="w-full h-full object-cover"
-                                  loop
-                                  muted
-                                  playsInline
-                                  preload="auto"
-                                  style={{ willChange: 'transform' }}
-                                >
-                                  <source src="/portfolio.mp4" type="video/mp4" />
-                                </video>
-                              </motion.div>
-                            ) : (
-                              <motion.div
-                                key="profile"
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.95 }}
-                                transition={{ duration: 0.2 }}
-                                className="relative w-full h-full"
-                              >
-                                <Image
-                                  src="/shahabprofile.png"
-                                  alt="Shahab Gul"
-                                  fill
-                                  priority
-                                  className="object-cover"
-                                  quality={90}
-                                  sizes="320px"
-                                />
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
+                          <Image
+                            src="/shahabprofile.png"
+                            alt="Shahab Gul"
+                            fill
+                            priority
+                            className="object-cover"
+                            quality={90}
+                            sizes="320px"
+                          />
                         </div>
                       </div>
                     </motion.div>
@@ -736,16 +714,10 @@ export default function Home() {
                     💻 Full Stack
                   </motion.span>
                   <motion.span
-                    className="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-full text-purple-400 text-sm font-medium backdrop-blur-sm"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    🎨 UI/UX Designer
-                  </motion.span>
-                  <motion.span
                     className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30 rounded-full text-blue-400 text-sm font-medium backdrop-blur-sm"
                     whileHover={{ scale: 1.05 }}
                   >
-                    🚀 React Expert
+                    🚀 React & Next.js
                   </motion.span>
                 </motion.div>
 
@@ -794,7 +766,7 @@ export default function Home() {
                 >
                   <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 shadow-2xl">
                     <p className="text-gray-300 text-lg leading-relaxed">
-                      A passionate full-stack developer and UI/UX designer crafting{' '}
+                      A passionate full-stack developer crafting{' '}
                       <span className="text-yellow-400 font-semibold">innovative digital solutions</span>{' '}
                       that combine functionality with stunning design.
                     </p>
