@@ -376,10 +376,11 @@ export default function Home() {
       </div>
 
       {/* Mobile Bottom Navigation */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 backdrop-blur-lg z-50 py-3 px-4 safe-bottom mx-3 sm:mx-0 rounded-[50px] sm:rounded-none"
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 backdrop-blur-lg z-50 py-3 px-4 safe-bottom mx-3 sm:mx-0 rounded-[50px] sm:rounded-none mb-1 sm:mb-0"
         style={{
           background: 'linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.9) 100%)',
-          boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.2)'
+          boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.2)',
+          border: '1px solid rgba(255, 255, 255, 0.1)'
         }}>
         <motion.div
           initial={{ y: 100 }}
