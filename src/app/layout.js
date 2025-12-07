@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import MobileNavigation from "@/components/MobileView";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,9 +53,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${poppins.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${poppins.variable} antialiased bg-slate-950`}
       >
-        {children}
+        {/* Simple Visible Background */}
+
+        {/* Content wrapper */}
+        <div className="relative z-10">
+          {children}
+        </div>
       </body>
     </html>
   );

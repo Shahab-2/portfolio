@@ -376,8 +376,11 @@ export default function Home() {
       </div>
 
       {/* Mobile Bottom Navigation */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 backdrop-blur-lg z-50 py-3 px-4 safe-bottom"
-        style={{ background: 'linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(31, 41, 55, 0.95) 100%)' }}>
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 backdrop-blur-lg z-50 py-3 px-4 safe-bottom mx-3 sm:mx-0 rounded-[50px] sm:rounded-none"
+        style={{
+          background: 'linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.9) 100%)',
+          boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.2)'
+        }}>
         <motion.div
           initial={{ y: 100 }}
           animate={{ y: 0 }}
@@ -411,7 +414,7 @@ export default function Home() {
                       ? 'bg-yellow-500 text-black shadow-lg shadow-yellow-500/30' 
                       : 'bg-gray-800/70'
                   }`}
-                  animate={{ scale: isActive ? 1.1 : 1 }}
+                  animate={{ scale: isActive ? 1.05 : 1 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
                   {item.icon}
@@ -435,7 +438,7 @@ export default function Home() {
               key="mobile-content"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex flex-col items-center justify-center text-center space-y-8 py-20 pb-36 w-full relative overflow-hidden"
+              className="flex flex-col items-center justify-center text-center space-y-8 py-10 sm:py-20 pb-0 sm:pb-36 w-full relative overflow-hidden"
             >
               {/* Mobile Background Decorations */}
               <motion.div
@@ -538,7 +541,7 @@ export default function Home() {
                 initial="initial"
                 whileHover="hover"
                 whileTap="tap"
-                className="relative inline-flex items-center px-8 py-4 text-black font-bold shadow-2xl rounded-2xl overflow-hidden group text-sm sm:text-base"
+                className="relative inline-flex items-center px-8 py-4 text-black font-bold shadow-2xl rounded-2xl overflow-hidden group text-sm sm:text-base mb-0"
                 style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' }}
               >
                 {/* Shine effect */}
@@ -850,7 +853,7 @@ export default function Home() {
       </section>
 
       {/* ABOUT SECTION */}
-      <section id="about" className="py-20 sm:py-32 pb-32 sm:pb-32 relative overflow-hidden">
+      <section id="about" className="py-20 sm:py-32 pb-10 sm:pb-32 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
             className="absolute top-20 left-20 w-96 h-96 rounded-full opacity-10 blur-3xl"
@@ -866,7 +869,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-20"
+            className="text-center mb-2 sm:mb-20"
           >
             <motion.div
               className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 rounded-full text-blue-400 text-sm font-medium backdrop-blur-sm mb-6"
@@ -1008,7 +1011,7 @@ export default function Home() {
       </section>
 
       {/* PORTFOLIO SECTION */}
-      <section id="portfolio" className="py-20 sm:py-32 pb-32 sm:pb-32 relative overflow-hidden">
+      <section id="portfolio" className="py-20 sm:py-32 pb-0 sm:pb-32 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
             className="absolute -top-40 -right-40 w-96 h-96 rounded-full opacity-10 blur-3xl"
@@ -1171,7 +1174,7 @@ export default function Home() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section id="contact" className="py-20 sm:py-32 pb-40 sm:pb-32 relative overflow-hidden">
+      <section id="contact" className="py-10 sm:py-32 sm:pb-32 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
             className="absolute bottom-20 right-20 w-96 h-96 rounded-full opacity-10 blur-3xl"

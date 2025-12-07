@@ -96,48 +96,93 @@ const NavButton = ({
   </motion.div>
 );
 
-// Mobile Navigation Component
-export default function MobileNavigation({ 
-  darkMode = true, 
-  activePage = '/' 
+// Enhanced Mobile Navigation Component
+export default function MobileNavigation({
+  activePage = '/'
 }) {
+  const navigationItems = [
+    { href: '/', icon: NavIcons.home, label: 'Home', key: '/' },
+    { href: '/about', icon: NavIcons.about, label: 'About', key: '/about' },
+    { href: '/portfolio', icon: NavIcons.portfolio, label: 'Projects', key: '/portfolio' },
+    { href: '/contact', icon: NavIcons.contact, label: 'Contact', key: '/contact' }
+  ];
+
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-gray-900/80 backdrop-blur-lg z-20 py-4">
-      <motion.div 
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
+    <div className="lg:hidden fixed bottom-0 left-0 right-0 backdrop-blur-xl z-50 py-3 px-4 safe-bottom rounded-t-3xl border-t border-white/10"
+         style={{
+           background: 'linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.9) 100%)',
+           boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.2)'
+         }}>
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="flex justify-around max-w-xl mx-auto"
+        className="flex justify-around items-center max-w-xl mx-auto"
       >
-        <NavButton 
-          href="/" 
-          icon={NavIcons.home} 
-          label="Home"
-          className="bg-gray-800/70 text-white"
-          activeClassName={activePage === '/' ? (darkMode ? 'bg-yellow-500 text-black' : 'bg-yellow-500') : ''}
-        />
-        <NavButton 
-          href="/about" 
-          icon={NavIcons.about} 
-          label="About"
-          className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          activeClassName={activePage === '/about' ? (darkMode ? 'bg-yellow-500 text-black' : 'bg-yellow-500') : ''}
-        />
-        <NavButton 
-          href="/portfolio" 
-          icon={NavIcons.portfolio} 
-          label="Portfolio"
-          className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          activeClassName={activePage === '/portfolio' ? (darkMode ? 'bg-yellow-500 text-black' : 'bg-yellow-500') : ''}
-        />
-        <NavButton 
-          href="/contact" 
-          icon={NavIcons.contact} 
-          label="Contact"
-          className="bg-gray-800/70 text-white hover:bg-yellow-500 hover:text-black"
-          activeClassName={activePage === '/contact' ? (darkMode ? 'bg-yellow-500 text-black' : 'bg-yellow-500') : ''}
-        />
+        {navigationItems.map((item, index) => {
+          const isActive = activePage === item.key;
+          return (
+            <motion.button
+              key={item.key}
+              onClick={() => window.location.href = item.href}
+              variants={buttonVariants}
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
+              className={`flex flex-col items-center justify-center gap-1 p-2 rounded-2xl transition-all duration-300 ${
+                isActive
+                  ? 'text-yellow-500'
+                  : 'text-gray-400 hover:text-yellow-500'
+              }`}
+              style={{
+                transform: 'none'
+              }}
+            >
+              <motion.div
+                className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 ${
+                  isActive
+                    ? 'bg-yellow-500 text-black shadow-xl shadow-yellow-500/30'
+                    : 'bg-gray-800/70 backdrop-blur-sm hover:bg-yellow-500 hover:text-black'
+                }`}
+                  animate={{ scale: isActive ? 1.05 : 1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  whileHover={{ scale: isActive ? 1.1 : 1.05 }}
+              >
+                <motion.div
+                  animate={{
+                    rotate: isActive ? [0, -5, 5, 0] : 0,
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: isActive ? Infinity : 0,
+                    repeatType: "loop"
+                  }}
+                >
+                  {item.icon}
+                </motion.div>
+              </motion.div>
+              <motion.span
+                className={`text-xs font-semibold transition-all duration-300 ${
+                  isActive ? 'text-yellow-500' : 'text-gray-400'
+                }`}
+                animate={{
+                  y: isActive ? [-1, 1, -1] : 0,
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: isActive ? Infinity : 0,
+                  repeatType: "loop"
+                }}
+              >
+                {item.label}
+              </motion.span>
+            </motion.button>
+          );
+        })}
       </motion.div>
+
+      {/* Decorative gradient line at top */}
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-20 h-0.5 bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent rounded-full"></div>
     </div>
   );
 }
